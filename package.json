@@ -21,15 +21,15 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/fmfe/tms.js.git"
+    "url": "git+https://github.com/FollowmeTech/tms.git"
   },
   "author": "fmfe",
   "license": "MIT",
   "keywords": [],
   "bugs": {
-    "url": "https://github.com/fmfe/tms/issues"
+    "url": "https://github.com/FollowmeTech/tms/issues"
   },
-  "homepage": "https://github.com/fmfe/tms#readme",
+  "homepage": "https://github.com/FollowmeTech/tms#readme",
   "devDependencies": {
     "@types/jest": "^22.2.3",
     "babel-core": "^6.26.0",
