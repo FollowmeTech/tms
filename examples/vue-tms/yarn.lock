@@ -652,9 +652,9 @@
   version "0.0.5"
   resolved "https://registry.yarnpkg.com/@fmfe/tms.js/-/tms.js-0.0.5.tgz#71c14286ae71c67d5aa6775e4e808d628766bb3c"
 
-"@fmfe/vue-tms@^0.0.4":
-  version "0.0.4"
-  resolved "https://registry.yarnpkg.com/@fmfe/vue-tms/-/vue-tms-0.0.4.tgz#21a200978d6a1ee1814cc8e572da82a2c0006988"
+"@fmfe/vue-tms@^0.0.8":
+  version "0.0.8"
+  resolved "https://registry.yarnpkg.com/@fmfe/vue-tms/-/vue-tms-0.0.8.tgz#8d87d5f73a1e998a923a7cfa142d7fd03ace3426"
 
 "@intervolga/optimize-cssnano-plugin@^1.0.5":
   version "1.0.6"
