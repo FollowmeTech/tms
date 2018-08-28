@@ -1,4 +1,4 @@
-import { TmsInstance } from '../typings/index';
+import { TmsInstance } from '../types/index';
 
 const getPrototypes = (obj: object, target: object): Array<object> => {
     const prototypes: Array<object> = [];

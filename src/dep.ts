@@ -1,4 +1,4 @@
-import { TmsDepInstance, TmsDepNotifyParams } from '../typings/index';
+import { TmsDepInstance, TmsDepNotifyParams } from '../types/index';
 
 class Dep implements TmsDepInstance {
     readonly subs: Array<Function> = [];

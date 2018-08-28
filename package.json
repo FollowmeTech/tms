@@ -5,7 +5,7 @@
   "main": "dist/tms.common.js",
   "module": "dist/tms.esm.js",
   "unpkg": "dist/tms.js",
-  "types": "./typings/index.d.ts",
+  "types": "./types/index.d.ts",
   "scripts": {
     "dev": "rollup --config --watch",
     "build": "rollup --config",
@@ -17,7 +17,7 @@
   "files": [
     "dist/",
     "src/",
-    "typings"
+    "types"
   ],
   "repository": {
     "type": "git",

@@ -1,4 +1,4 @@
-import { TmsInstance, TmsDepInstance } from '../typings/index';
+import { TmsInstance, TmsDepInstance } from '../types/index';
 import Dep from './dep';
 import observe from './observe';
 

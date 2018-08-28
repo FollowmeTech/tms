@@ -18,7 +18,7 @@
     "node"
   ],
   "include": [
-    "typings/**/*.d.ts",
+    "types/**/*.d.ts",
     "src/**/*.ts",
     "package/vue-tms/**/*.ts",
     "src/**/*.tsx"
