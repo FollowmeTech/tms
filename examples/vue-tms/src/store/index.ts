@@ -10,7 +10,9 @@ class Store extends VueTms {
 }
 
 const store = new Store()
-store.observe()
+// store.run()
+console.log(store)
+
 export default store
 declare module '@fmfe/vue-tms/types/index' {
     type _StoreInstance = {

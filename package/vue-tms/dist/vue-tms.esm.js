@@ -41,6 +41,7 @@ var VueTms = function () {
         classCallCheck(this, VueTms);
 
         this.onList = [];
+        this.subs = [];
         if (!VueTms._Vue || !VueTms._Tms) {
             throw new Error('Please install with Vue.use(VueTms, Tms).');
         }
@@ -48,8 +49,8 @@ var VueTms = function () {
     }
 
     createClass(VueTms, [{
-        key: 'observe',
-        value: function observe() {
+        key: 'run',
+        value: function run() {
             var _this = this;
 
             Object.defineProperty(this, 'app', {
@@ -65,9 +66,14 @@ var VueTms = function () {
             var observeTms = function observeTms(opts, paths) {
                 Object.keys(opts).forEach(function (k) {
                     var item = opts[k];
-                    if (VueTms._Tms && item instanceof VueTms._Tms && process.env.NODE_ENV !== 'production') {
+                    if (VueTms._Tms && item instanceof VueTms._Tms) {
                         var onChage = function onChage(event) {
-                            console.log('type       ' + paths.concat([k]).join('/') + '.' + event.type + '(payload: ' + getType(event.payload) + ');', '\n\rpayload   ', event.payload, '\n\rpayloads   ', event.payloads, '\n\rtarget    ', event.target, '\n\r---');
+                            if (process.env.NODE_ENV !== 'production') {
+                                console.log('type       ' + paths.concat([k]).join('/') + '.' + event.type + '(payload: ' + getType(event.payload) + ');', '\n\rpayload   ', event.payload, '\n\rpayloads   ', event.payloads, '\n\rtarget    ', event.target, '\n\r---');
+                            }
+                            _this.subs.forEach(function (fn) {
+                                return fn(event);
+                            });
                         };
                         item.dep.addSub(onChage);
                         _this.onList.push({
@@ -81,6 +87,17 @@ var VueTms = function () {
             observeTms(this, []);
         }
     }, {
+        key: 'subscribe',
+        value: function subscribe(fn) {
+            this.subs.push(fn);
+        }
+    }, {
+        key: 'unsubscribe',
+        value: function unsubscribe(fn) {
+            var index = this.subs.indexOf(fn);
+            this.subs.splice(index, 1);
+        }
+    }, {
         key: 'destroy',
         value: function destroy() {
             if (this.app) {
@@ -88,8 +105,9 @@ var VueTms = function () {
                 this.onList.forEach(function (item) {
                     item.target.dep.removeSub(item.onChage);
                 });
-                this.onList.splice(0, this.onList.length);
             }
+            this.onList.splice(0, this.onList.length);
+            this.subs.splice(0, this.subs.length);
         }
     }], [{
         key: 'install',

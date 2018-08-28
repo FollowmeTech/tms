@@ -10,6 +10,7 @@ class Store extends VueTms {
 }
 const store = new Store();
 
+store.run();
 const vm = new Vue({
     store
 });
