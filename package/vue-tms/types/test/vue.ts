@@ -1,0 +1,17 @@
+import Vue from 'vue';
+import Tms from '@fmfe/tms.js';
+import VueTms from '../index';
+
+Vue
+    .use(VueTms, Tms);
+
+class Store extends VueTms {
+
+}
+const store = new Store();
+
+const vm = new Vue({
+    store
+});
+vm.$store;
+

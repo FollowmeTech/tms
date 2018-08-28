@@ -1,0 +1,27 @@
+{
+  "name": "@fmfe/vue-tms",
+  "version": "0.0.2",
+  "description": "tms is used in Vue",
+  "main": "dist/vue-tms.common.js",
+  "module": "dist/vue-tms.esm.js",
+  "unpkg": "dist/vue-tms.js",
+  "types": "./types/index.d.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FollowmeTech/tms.git"
+  },
+  "author": "FollowmeTech",
+  "license": "MIT",
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/FollowmeTech/tms/issues"
+  },
+  "homepage": "https://github.com/FollowmeTech/tms#readme",
+  "devDependencies": {
+    "@fmfe/tms.js": "^0.0.4",
+    "vue": "^2.5.17"
+  }
+}
