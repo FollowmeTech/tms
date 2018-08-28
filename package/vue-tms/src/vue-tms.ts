@@ -1,4 +1,4 @@
-import { VueTmsInstance } from '../types/index';
+import { VueTmsInstance, VueTmsDepNotifyParams } from '../types/index';
 import Vue, { VueConstructor } from 'vue';
 import Tms, { TmsDepNotifyParams, TmsConstructor } from '@fmfe/tms.js';
 
@@ -6,7 +6,7 @@ const getType = (payload: any): string => {
     return Object.prototype.toString.call(payload).replace(/^(.*?) |]$/g, '').toLowerCase();
 };
 
-type SubFunc = (event: TmsDepNotifyParams) => void;
+type SubFunc = (event: VueTmsDepNotifyParams) => void;
 
 export default class VueTms implements VueTmsInstance {
   static _Vue: VueConstructor | undefined;
@@ -50,9 +50,10 @@ export default class VueTms implements VueTmsInstance {
               const item: Tms = opts[k];
               if (VueTms._Tms && item instanceof VueTms._Tms) {
                   const onChage = (event: TmsDepNotifyParams) => {
+                      const path = `${paths.concat([k]).join('/')}.${event.type}`;
                       if (process.env.NODE_ENV !== 'production') {
                           console.log(
-                              `type       ${paths.concat([k]).join('/')}.${event.type}(payload: ${getType(event.payload)});`,
+                              `type       ${path}(payload: ${getType(event.payload)});`,
                               `\n\rpayload   `,
                               event.payload,
                               `\n\rpayloads   `,
@@ -62,7 +63,11 @@ export default class VueTms implements VueTmsInstance {
                               `\n\r---`
                           );
                       }
-                      this.subs.forEach(fn => fn(event));
+                      this.subs.forEach(fn => fn({
+                          ...event,
+                          path,
+                          time: Date.now()
+                      }));
                   };
                   item.dep.addSub(onChage);
                   this.onList.push({

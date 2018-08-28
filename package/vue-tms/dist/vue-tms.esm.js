@@ -22,6 +22,20 @@ var createClass = function () {
   };
 }();
 
+var _extends = Object.assign || function (target) {
+  for (var i = 1; i < arguments.length; i++) {
+    var source = arguments[i];
+
+    for (var key in source) {
+      if (Object.prototype.hasOwnProperty.call(source, key)) {
+        target[key] = source[key];
+      }
+    }
+  }
+
+  return target;
+};
+
 var toConsumableArray = function (arr) {
   if (Array.isArray(arr)) {
     for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) arr2[i] = arr[i];
@@ -68,11 +82,12 @@ var VueTms = function () {
                     var item = opts[k];
                     if (VueTms._Tms && item instanceof VueTms._Tms) {
                         var onChage = function onChage(event) {
+                            var path = paths.concat([k]).join('/') + '.' + event.type;
                             if (process.env.NODE_ENV !== 'production') {
-                                console.log('type       ' + paths.concat([k]).join('/') + '.' + event.type + '(payload: ' + getType(event.payload) + ');', '\n\rpayload   ', event.payload, '\n\rpayloads   ', event.payloads, '\n\rtarget    ', event.target, '\n\r---');
+                                console.log('type       ' + path + '(payload: ' + getType(event.payload) + ');', '\n\rpayload   ', event.payload, '\n\rpayloads   ', event.payloads, '\n\rtarget    ', event.target, '\n\r---');
                             }
                             _this.subs.forEach(function (fn) {
-                                return fn(event);
+                                return fn(_extends({}, event, { path: path, time: Date.now() }));
                             });
                         };
                         item.dep.addSub(onChage);
