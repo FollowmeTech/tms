@@ -1,0 +1,55 @@
+## 安装
+```bash
+   yarn add @fmfe/vue-tms
+   # or
+   npm install @fmfe/vue-tms
+```
+
+## 使用
+```javascript
+import Vue from 'vue'
+import Tms from '@fmfe/tms.js'
+import VueTms from '@fmfe/vue-tms'
+
+Vue.use(VueTms, Tms)
+
+class Count extends Tms {
+    count: number = 0
+    $increment() {
+        this.count++;
+    }
+}
+
+class Store extends VueTms {
+    count: Count = new Count()
+}
+
+const store = new Store()
+
+// 运行程序
+store.run()
+
+// 订阅状态变化
+const onChage = (event) => {
+    console.log(event);
+}
+store.subscribe(onChage)
+
+// 取消状态变化订阅
+// store.unsubscribe(onChage)
+
+// 销毁实例
+store.destroy()
+
+const app = new Vue({
+    store
+})
+
+// Typescript 添加类型，在组件中可以获得代码提示
+declare module '@fmfe/vue-tms/types/index' {
+    type _StoreInstance = {
+        [P in keyof Store]: Store[P]
+    }
+    interface VueTmsInstance extends _StoreInstance {}
+  }
+```
