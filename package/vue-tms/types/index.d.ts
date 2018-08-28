@@ -5,7 +5,7 @@ import Tms, { TmsDepNotifyParams } from '@fmfe/tms.js';
 export type SubFunc = (event: VueTmsDepNotifyParams) => void;
 
 export interface VueTmsDepNotifyParams extends TmsDepNotifyParams {
-    path: string;
+    position: string;
     time: number;
 }
 

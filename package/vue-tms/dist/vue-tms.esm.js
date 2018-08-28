@@ -82,12 +82,12 @@ var VueTms = function () {
                     var item = opts[k];
                     if (VueTms._Tms && item instanceof VueTms._Tms) {
                         var onChage = function onChage(event) {
-                            var path = paths.concat([k]).join('/') + '.' + event.type;
+                            var position = '' + paths.concat([k, event.type]).join('.');
                             if (process.env.NODE_ENV !== 'production') {
-                                console.log('type       ' + path + '(payload: ' + getType(event.payload) + ');', '\n\rpayload   ', event.payload, '\n\rpayloads  ', event.payloads, '\n\rtarget    ', event.target, '\n\r---');
+                                console.log('type       ' + position + '(payload: ' + getType(event.payload) + ');', '\n\rpayload   ', event.payload, '\n\rpayloads  ', event.payloads, '\n\rtarget    ', event.target, '\n\r---');
                             }
                             _this.subs.forEach(function (fn) {
-                                return fn(_extends({}, event, { path: path, time: Date.now() }));
+                                return fn(_extends({}, event, { position: position, time: Date.now() }));
                             });
                         };
                         item.dep.addSub(onChage);
@@ -141,6 +141,13 @@ var VueTms = function () {
             Object.defineProperty(VueTms._Vue.prototype, '_store', {
                 get: function get$$1() {
                     return this.$options.store;
+                }
+            });
+            VueTms._Vue.mixin({
+                destroyed: function destroyed() {
+                    if (this.$options.store) {
+                        this.$options.store.destroy();
+                    }
                 }
             });
         }

@@ -33,6 +33,13 @@ export default class VueTms implements VueTmsInstance {
               return (this as any).$options.store;
           }
       });
+      VueTms._Vue.mixin({
+          destroyed() {
+              if ((this as any).$options.store) {
+                  (this as any).$options.store.destroy();
+              }
+          }
+      });
   }
   run(): this {
       Object.defineProperty(this, 'app', {
@@ -50,10 +57,10 @@ export default class VueTms implements VueTmsInstance {
               const item: Tms = opts[k];
               if (VueTms._Tms && item instanceof VueTms._Tms) {
                   const onChage = (event: TmsDepNotifyParams) => {
-                      const path = `${paths.concat([k]).join('/')}.${event.type}`;
+                      const position = `${paths.concat([k, event.type]).join('.')}`;
                       if (process.env.NODE_ENV !== 'production') {
                           console.log(
-                              `type       ${path}(payload: ${getType(event.payload)});`,
+                              `type       ${position}(payload: ${getType(event.payload)});`,
                               `\n\rpayload   `,
                               event.payload,
                               `\n\rpayloads  `,
@@ -65,7 +72,7 @@ export default class VueTms implements VueTmsInstance {
                       }
                       this.subs.forEach(fn => fn({
                           ...event,
-                          path,
+                          position,
                           time: Date.now()
                       }));
                   };
