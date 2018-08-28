@@ -73,7 +73,7 @@ var VueTms = function () {
             Object.defineProperty(this, 'onList', {
                 enumerable: false
             });
-            if (!VueTms._Vue) return;
+            if (!VueTms._Vue) return this;
             this.app = new VueTms._Vue({
                 data: this
             });
@@ -100,17 +100,20 @@ var VueTms = function () {
                 });
             };
             observeTms(this, []);
+            return this;
         }
     }, {
         key: 'subscribe',
         value: function subscribe(fn) {
             this.subs.push(fn);
+            return this;
         }
     }, {
         key: 'unsubscribe',
         value: function unsubscribe(fn) {
             var index = this.subs.indexOf(fn);
             this.subs.splice(index, 1);
+            return this;
         }
     }, {
         key: 'destroy',
@@ -123,6 +126,7 @@ var VueTms = function () {
             }
             this.onList.splice(0, this.onList.length);
             this.subs.splice(0, this.subs.length);
+            return this;
         }
     }], [{
         key: 'install',

@@ -20,7 +20,7 @@ export default class VueTms implements VueTmsInstance {
       }
       this.app = null;
   }
-  static install(_Vue: VueConstructor, _Tms: TmsConstructor) {
+  static install(_Vue: VueConstructor, _Tms: TmsConstructor): void {
       VueTms._Vue = _Vue;
       VueTms._Tms = _Tms;
       Object.defineProperty(VueTms._Vue.prototype, '$store', {
@@ -34,14 +34,14 @@ export default class VueTms implements VueTmsInstance {
           }
       });
   }
-  run(): void {
+  run(): this {
       Object.defineProperty(this, 'app', {
           enumerable: false
       });
       Object.defineProperty(this, 'onList', {
           enumerable: false
       });
-      if (!VueTms._Vue) return;
+      if (!VueTms._Vue) return this;
       this.app = new VueTms._Vue({
           data: this
       });
@@ -79,15 +79,18 @@ export default class VueTms implements VueTmsInstance {
           });
       };
       observeTms(this, []);
+      return this;
   }
-  subscribe(fn: SubFunc): void {
+  subscribe(fn: SubFunc): this {
       this.subs.push(fn);
+      return this;
   }
-  unsubscribe(fn: SubFunc): void {
+  unsubscribe(fn: SubFunc): this {
       const index = this.subs.indexOf(fn);
       this.subs.splice(index, 1);
+      return this;
   }
-  destroy() {
+  destroy(): this {
       if (this.app) {
           this.app.$destroy();
           this.onList.forEach(item => {
@@ -96,5 +99,6 @@ export default class VueTms implements VueTmsInstance {
       }
       this.onList.splice(0, this.onList.length);
       this.subs.splice(0, this.subs.length);
+      return this;
   }
 }

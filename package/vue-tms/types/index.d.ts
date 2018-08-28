@@ -13,10 +13,10 @@ export interface VueTmsInstance {
     readonly subs: Array<SubFunc>;
     readonly onList: Array<{ target: Tms; onChage: Function }>;
     app: Vue | null;
-    run(): void;
-    subscribe(fn: SubFunc): void;
-    unsubscribe(fn: SubFunc): void;
-    destroy(): void;
+    run(): this;
+    subscribe(fn: SubFunc): this;
+    unsubscribe(fn: SubFunc): this;
+    destroy(): this;
 }
 
 interface VueTmsConstructor {
