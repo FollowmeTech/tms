@@ -14,4 +14,14 @@ const vm = new Vue({
     store
 });
 vm.$store;
+store.subscribe((event) => {
+    event.payload;
+    event.payloads;
+    event.target;
+    event.type;
+});
+
+store.unsubscribe(() => {
+
+});
 

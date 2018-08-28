@@ -1,12 +1,16 @@
 import './vue';
 import Vue, { PluginFunction } from 'vue';
-import Tms from '@fmfe/tms.js';
+import Tms, { TmsDepNotifyParams } from '@fmfe/tms.js';
 
+export type SubFunc = (event: TmsDepNotifyParams) => void;
 
 export interface VueTmsInstance {
-    onList: Array<{ target: Tms; onChage: Function }>;
+    readonly subs: Array<SubFunc>;
+    readonly onList: Array<{ target: Tms; onChage: Function }>;
     app: Vue | null;
-    observe(): void;
+    run(): void;
+    subscribe(fn: SubFunc): void;
+    unsubscribe(fn: SubFunc): void;
     destroy(): void;
 }
 
