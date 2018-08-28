@@ -56,7 +56,7 @@ export default class VueTms implements VueTmsInstance {
                               `type       ${path}(payload: ${getType(event.payload)});`,
                               `\n\rpayload   `,
                               event.payload,
-                              `\n\rpayloads   `,
+                              `\n\rpayloads  `,
                               event.payloads,
                               `\n\rtarget    `,
                               event.target,

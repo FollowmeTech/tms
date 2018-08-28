@@ -90,7 +90,7 @@
                           var onChage = function onChage(event) {
                               var path = paths.concat([k]).join('/') + '.' + event.type;
                               if (process.env.NODE_ENV !== 'production') {
-                                  console.log('type       ' + path + '(payload: ' + getType(event.payload) + ');', '\n\rpayload   ', event.payload, '\n\rpayloads   ', event.payloads, '\n\rtarget    ', event.target, '\n\r---');
+                                  console.log('type       ' + path + '(payload: ' + getType(event.payload) + ');', '\n\rpayload   ', event.payload, '\n\rpayloads  ', event.payloads, '\n\rtarget    ', event.target, '\n\r---');
                               }
                               _this.subs.forEach(function (fn) {
                                   return fn(_extends({}, event, { path: path, time: Date.now() }));

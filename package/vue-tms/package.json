@@ -1,6 +1,6 @@
 {
   "name": "@fmfe/vue-tms",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "tms is used in Vue",
   "main": "dist/vue-tms.common.js",
   "module": "dist/vue-tms.esm.js",
