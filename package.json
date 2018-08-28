@@ -1,0 +1,53 @@
+{
+  "name": "@fmfe/tms.js",
+  "version": "0.0.4",
+  "description": "Using ES6 class to write state management",
+  "main": "dist/tms.common.js",
+  "module": "dist/tms.esm.js",
+  "unpkg": "dist/tms.js",
+  "types": "./typings/index.d.ts",
+  "scripts": {
+    "dev": "rollup --config --watch",
+    "build": "rollup --config",
+    "test": "npm run lint && npm run test:unit && npm run build",
+    "lint": "eslint . --ext .js,.html,.ts,.tsx",
+    "lint:fix": "eslint . --fix --ext .js,.html,.ts,.tsx",
+    "test:unit": "jest --config=./tests/jest.config.js --coverage"
+  },
+  "files": [
+    "dist/",
+    "src/",
+    "typings"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fmfe/tms.js.git"
+  },
+  "author": "fmfe",
+  "license": "MIT",
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/fmfe/tms/issues"
+  },
+  "homepage": "https://github.com/fmfe/tms#readme",
+  "devDependencies": {
+    "@types/jest": "^22.2.3",
+    "babel-core": "^6.26.0",
+    "babel-eslint": "^8.2.3",
+    "babel-plugin-transform-object-assign": "^6.22.0",
+    "babel-preset-es2015-rollup": "^3.0.0",
+    "babel-preset-stage-0": "^6.24.1",
+    "eslint": "^4.19.1",
+    "eslint-config-alloy": "^1.4.2",
+    "eslint-plugin-jest": "^21.15.1",
+    "eslint-plugin-react": "^7.8.2",
+    "eslint-plugin-typescript": "^0.12.0",
+    "jest": "^22.4.4",
+    "rollup": "^0.57.1",
+    "rollup-plugin-babel": "^3.0.3",
+    "rollup-plugin-typescript2": "^0.14.0",
+    "rollup-plugin-uglify": "^3.0.0",
+    "typescript": "^2.8.3",
+    "typescript-eslint-parser": "^15.0.0"
+  }
+}
