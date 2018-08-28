@@ -9,8 +9,8 @@
     "test:unit": "vue-cli-service test:unit"
   },
   "dependencies": {
-    "@fmfe/tms.js": "^0.0.4",
-    "@fmfe/vue-tms": "^0.0.2",
+    "@fmfe/tms.js": "^0.0.5",
+    "@fmfe/vue-tms": "^0.0.3",
     "register-service-worker": "^1.0.0",
     "vue": "^2.5.17",
     "vue-class-component": "^6.0.0",
