@@ -70,6 +70,9 @@ var VueTms = function () {
             Object.defineProperty(this, 'app', {
                 enumerable: false
             });
+            Object.defineProperty(this, 'subs', {
+                enumerable: false
+            });
             Object.defineProperty(this, 'onList', {
                 enumerable: false
             });

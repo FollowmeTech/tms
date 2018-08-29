@@ -45,6 +45,9 @@ export default class VueTms implements VueTmsInstance {
       Object.defineProperty(this, 'app', {
           enumerable: false
       });
+      Object.defineProperty(this, 'subs', {
+          enumerable: false
+      });
       Object.defineProperty(this, 'onList', {
           enumerable: false
       });
