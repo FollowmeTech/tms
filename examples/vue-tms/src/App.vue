@@ -2,16 +2,15 @@
     <div id="app">
         <nav class="nav">
             <!-- <button class="button">录制状态</button> -->
-            <button class="button" @click="saveSnapshot">保存快照</button>
+            <button class="button">保存快照</button>
         </nav>
         <router-view/>
         <h2>快照</h2>
         <ul class="snapshots">
             <li v-for="(item, $index) in snapshots" :key="$index">
-                <textarea :value="item" />
+                <textarea :value="item.state" />
                 <div class="button-wrap">
-                    <button class="button" @click="restoreSnapshot(item)">还原</button>
-                    <button class="button" @click="restoreSnapshotRemove($index)">删除</button>
+                    <button class="button" @click="tmsSnapshot.recoveryOfIndex($index)">还原</button>
                 </div>
             </li>
         </ul>
@@ -20,33 +19,15 @@
 <script lang="ts">
 import Vue from 'vue';
 import { Component, Watch } from 'vue-property-decorator';
-import Tms from '@fmfe/tms.js';
+import { tmsSnapshot } from '@/store';
 
 @Component
 export default class App extends Vue {
-    snapshots: Array<string> = [];
-    saveSnapshot () {
-        this.snapshots.push(JSON.stringify(this.$store));
-    }
-    restoreSnapshotRemove (index: number) {
-        this.snapshots.splice(index, index + 1);
-    }
-    restoreSnapshot (stateText: string) {
-        restoreSnapshot(this.$store, stateText);
-        function restoreSnapshot (store: any, stateText: string) {
-            const state = JSON.parse(stateText);
-            const _restoreSnapshot = (store: any, state: any) => {
-                Object.keys(state).forEach(k => {
-                    const currentState: any = state[k];
-                    if (store[k] instanceof Tms) {
-                        _restoreSnapshot(store[k], currentState);
-                    } else {
-                        store[k] = currentState;
-                    }
-                });
-            };
-            _restoreSnapshot(store, state);
-        }
+    tmsSnapshot = tmsSnapshot;
+    get snapshots () {
+        return this.tmsSnapshot.snapshots.sort((a, b) => {
+            return b.time - a.time;
+        });
     }
 }
 </script>
