@@ -1,9 +1,5 @@
 <template>
     <div id="app">
-        <nav class="nav">
-            <!-- <button class="button">录制状态</button> -->
-            <button class="button">保存快照</button>
-        </nav>
         <router-view/>
         <h2>快照</h2>
         <ul class="snapshots">
@@ -41,14 +37,6 @@ export default class App extends Vue {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-}
-.nav {
-    margin-bottom: 10px;
-    .button {
-        & + .button {
-            margin-left: 10px;
-        }
-    }
 }
 .snapshots {
     padding: 0;
