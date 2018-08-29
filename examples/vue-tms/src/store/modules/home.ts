@@ -1,19 +1,19 @@
-import Tms from '@fmfe/tms.js'
+import Tms from '@fmfe/tms.js';
 
 export class IndexInput extends Tms {
   value: string ='';
   list: Array<string>= [];
   $value (value: string) {
-    this.value = value
+      this.value = value;
   }
   $addItem () {
-    if (this.value) {
-      this.list.push(this.value)
-      this.value = ''
-    }
+      if (this.value) {
+          this.list.push(this.value);
+          this.value = '';
+      }
   }
   $deleteItem (index: number) {
-    this.list.splice(index, index + 1)
+      this.list.splice(index, index + 1);
   }
 }
 

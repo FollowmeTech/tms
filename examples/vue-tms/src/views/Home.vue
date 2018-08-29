@@ -16,19 +16,19 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator'
+import { Component, Vue } from 'vue-property-decorator';
 
 @Component
 export default class Home extends Vue {
-  get indexInput () {
-    return this.$store.home.indexInput
-  }
-  get value (): string {
-    return this.indexInput.value
-  }
-  set value (text: string) {
-    this.indexInput.$value(text)
-  }
+    get indexInput () {
+        return this.$store.home.indexInput;
+    }
+    get value (): string {
+        return this.indexInput.value;
+    }
+    set value (text: string) {
+        this.indexInput.$value(text);
+    }
 }
 </script>
 <style scoped>
