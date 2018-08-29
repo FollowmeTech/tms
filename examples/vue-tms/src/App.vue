@@ -1,5 +1,9 @@
 <template>
     <div id="app">
+        <nav class="nav">
+            <button class="button" @click="tmsSnapshot.play()">播放快照({{tmsSnapshot.playIndex}}/{{snapshots.length}}) Next Time:{{tmsSnapshot.playNextTime}}ms</button>
+            <button class="button" @click="tmsSnapshot.clear()">清空快照</button>
+        </nav>
         <router-view/>
         <h2>快照</h2>
         <ul class="snapshots">
@@ -10,6 +14,7 @@
                 </div>
             </li>
         </ul>
+        <div class="playing" v-show="tmsSnapshot.playing"></div>
     </div>
 </template>
 <script lang="ts">
@@ -38,6 +43,14 @@ export default class App extends Vue {
   text-align: center;
   color: #2c3e50;
 }
+.nav {
+    margin-bottom: 10px;
+    .button {
+        & + .button {
+            margin-left: 10px;
+        }
+    }
+}
 .snapshots {
     padding: 0;
     margin: 0;
@@ -65,5 +78,14 @@ export default class App extends Vue {
         height: 30px;
         margin: 0 10px;
     }
+}
+.playing {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+    background: rgba(0, 0, 0, 0.2);
 }
 </style>

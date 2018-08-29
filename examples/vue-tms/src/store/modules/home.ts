@@ -13,7 +13,7 @@ export class IndexInput extends Tms {
       }
   }
   $deleteItem (index: number) {
-      this.list.splice(index, index + 1);
+      this.list.splice(index, 1);
   }
 }
 
