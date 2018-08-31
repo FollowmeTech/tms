@@ -63,7 +63,7 @@ export default class VueTms implements VueTmsInstance {
                       const position = `${paths.concat([k, event.type]).join('.')}`;
                       if (process.env.NODE_ENV !== 'production') {
                           console.log(
-                              `type       ${position}(payload: ${getType(event.payload)});`,
+                              `position   ${position}(payload: ${getType(event.payload)});`,
                               `\n\rpayload   `,
                               event.payload,
                               `\n\rpayloads  `,
