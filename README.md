@@ -86,7 +86,7 @@ list.dep.addSub(({ type, payload }) => {
 
 Tms将程序划分为五种端，不同的端来负责不同的事情，使不同的端职责明确、清晰。Tms可以监听到程序是在`哪个接收端`在`什么时间`接收到了`什么货物`，我们只需要在监听端将接收端的`地点、时间、货物`记录下来，在未来的任何时候，都可以重新走一次这个记录，并且得到的结果也是一致的。
 
-## 常见的错误
+## 常见的问题
 **1、在接收端损坏本次入库的货物**  
 错误的：
 ```typescript
@@ -129,4 +129,120 @@ class Student extends Tms {
         return this;
     }
 }
+```
+**2、如何处理请求**  
+```
+import Tms from '@fmfe/tms.js';
+
+export interface Response {
+    success: boolean;
+    data: Data[];
+}
+
+export interface Data {
+    id: string;
+    authorID: string;
+    tab?: Tab;
+    content: string;
+    title: string;
+    lastReplyAt: string;
+    good: boolean;
+    top: boolean;
+    replyCount: number;
+    visitCount: number;
+    createAt: string;
+    author: Author;
+}
+
+export interface Author {
+    loginname: string;
+    avatarURL: string;
+}
+
+export enum Tab {
+    Ask = 'ask',
+    Share = 'share',
+}
+
+// 错误的例子
+class TopicsError extends Tms {
+    data: Data[] = []
+    loading: boolean = false;
+    $loadStart () {
+        this.loading = true;
+    }
+    $loadSuccess (data: Data[]) {
+        this.data = data;
+        this.loading = false;
+    }
+    $loadError () {
+        this.loading = false;
+    }
+    async fetchTopics () {
+        this.$loadStart();
+        const res: Response = await fetch('https://cnodejs.org/api/v1/topics', {
+            'credentials': 'include',
+            'headers': {},
+            'referrer': 'https://cnodejs.org/api',
+            'referrerPolicy': 'unsafe-url',
+            'body': null,
+            'method': 'GET',
+            'mode': 'cors'
+        }).then(res => res.json());
+        // 这是一种错误的写法，一个异步的请求，无论成功失败，都应该把数据提交给接收端，由接收端去处理请求回来的数据
+        if (res.success) {
+            this.$loadSuccess(res.data);
+        } else {
+            this.$loadError();
+        }
+    }
+}
+
+const topicsError = new TopicsError();
+
+topicsError.fetchTopics();
+
+topicsError.dep.addSub(({ payload }) => {
+    console.log(payload); // 这里就无法保证能监听到topicsRight.fetchTopics()方法请求回来的全部数据，因为请求失败会走$loadError方法
+});
+
+// 正确的例子
+class TopicsRight extends Tms {
+    data: Data[] = []
+    loading: boolean = false;
+    $loadStart () {
+        this.loading = true;
+    }
+    $loadDone (res: Response) {
+        // 在接收端处理数据
+        if (res.success && Array.isArray(res.data)) {
+            this.data = res.data;
+        }
+        this.loading = false;
+    }
+    async fetchTopics () {
+        this.$loadStart();
+        const res: Response = await fetch('https://cnodejs.org/api/v1/topics', {
+            'credentials': 'include',
+            'headers': {},
+            'referrer': 'https://cnodejs.org/api',
+            'referrerPolicy': 'unsafe-url',
+            'body': null,
+            'method': 'GET',
+            'mode': 'cors'
+        }).then(res => res.json());
+        // 正确的做法，是将请求回来的完整输入传给接收端，这样监听端就能监听到请求回来的数据了
+        this.$loadDone(res);
+    }
+}
+
+const topicsRight = new TopicsRight();
+
+topicsRight.fetchTopics();
+
+topicsRight.dep.addSub(({ payload }) => {
+    console.log(payload); // 这里就能监听到topicsRight.fetchTopics()方法请求回来的全部数据
+});
+
+
 ```
