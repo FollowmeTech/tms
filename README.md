@@ -87,7 +87,7 @@ list.dep.addSub(({ type, payload }) => {
 Tms将程序划分为五种端，不同的端来负责不同的事情，使不同的端职责明确、清晰。Tms可以监听到程序是在`哪个接收端`在`什么时间`接收到了`什么货物`，我们只需要在监听端将接收端的`地点、时间、货物`记录下来，在未来的任何时候，都可以重新走一次这个记录，并且得到的结果也是一致的。
 
 ## 常见的问题
-**1、在接收端损坏本次入库的货物**  
+#### 1、在接收端损坏本次入库的货物
 错误的：
 ```typescript
 import Tms from '@fmfe/tms.js';
@@ -130,8 +130,8 @@ class Student extends Tms {
     }
 }
 ```
-**2、如何处理请求**  
-```
+#### 2、如何处理请求
+```typescript
 import Tms from '@fmfe/tms.js';
 
 export interface Response {
