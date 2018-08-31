@@ -69,9 +69,12 @@ class List extends Tms {
 
 const list = new List();
 
+list.delay();
+
 // 监听端
-list.dep.addSub(({ type }) => {
+list.dep.addSub(({ type, payload }) => {
     console.log(type); // $plus
+    console.log(payload); // 1
 });
 
 ```
