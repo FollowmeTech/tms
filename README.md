@@ -189,7 +189,9 @@ class TopicsError extends Tms {
             'method': 'GET',
             'mode': 'cors'
         }).then(res => res.json());
-        // 这是一种错误的写法，一个异步的请求，无论成功失败，都应该把数据提交给接收端，由接收端去处理请求回来的数据
+        // 这是一种错误的写法，一个异步的请求，
+        // 无论成功失败，都应该把数据提交给接收端，
+        // 由接收端去处理请求回来的数据
         if (res.success) {
             this.$loadSuccess(res.data);
         } else {
@@ -203,7 +205,9 @@ const topicsError = new TopicsError();
 topicsError.fetchTopics();
 
 topicsError.dep.addSub(({ payload }) => {
-    console.log(payload); // 这里就无法保证能监听到topicsRight.fetchTopics()方法请求回来的全部数据，因为请求失败会走$loadError方法
+    // 这里就无法保证能监听到topicsRight.fetchTopics()方法请求回来的全部数据，
+    // 因为请求失败会走$loadError方法
+    console.log(payload); 
 });
 
 // 正确的例子
@@ -231,7 +235,8 @@ class TopicsRight extends Tms {
             'method': 'GET',
             'mode': 'cors'
         }).then(res => res.json());
-        // 正确的做法，是将请求回来的完整输入传给接收端，这样监听端就能监听到请求回来的数据了
+        // 正确的做法，是将请求回来的完整输入传给接收端，
+        // 这样监听端就能监听到请求回来的数据了
         this.$loadDone(res);
     }
 }
