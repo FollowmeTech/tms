@@ -192,6 +192,7 @@ class TopicsError extends Tms {
         // 这是一种错误的写法，一个异步的请求，
         // 无论成功失败，都应该把数据提交给接收端，
         // 由接收端去处理请求回来的数据
+        // 而不是在搬运端来处理
         if (res.success) {
             this.$loadSuccess(res.data);
         } else {
@@ -210,6 +211,7 @@ topicsError.dep.addSub(({ payload }) => {
     console.log(payload); 
 });
 
+// ------------------------ 华丽分割线 ------------------------
 // 正确的例子
 class TopicsRight extends Tms {
     data: Data[] = []
