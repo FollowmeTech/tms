@@ -17,7 +17,10 @@ class Tms {
         Object.getOwnPropertyNames(prototype).forEach(type => {
             // 获取当前属性的相关描述
             const descriptor = Object.getOwnPropertyDescriptor(prototype, type);
-            if (typeof descriptor !== 'undefined' && /^\$/.test(type) && typeof descriptor.value === 'function') {
+            if (
+                typeof descriptor !== 'undefined' &&
+                /^\$/.test(type) && typeof descriptor.value === 'function'
+            ) {
                 // 监听
                 Object.defineProperty(this, type, {
                     ...descriptor,
