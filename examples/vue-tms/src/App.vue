@@ -35,7 +35,7 @@ export default class App extends Vue {
 
 <style lang="less" scoped>
 #app {
-  width: 480px;
+  max-width: 480px;
   margin: 0 auto;
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -46,6 +46,7 @@ export default class App extends Vue {
 .nav {
     margin-bottom: 10px;
     .button {
+        background: #ccc;
         & + .button {
             margin-left: 10px;
         }
@@ -77,6 +78,7 @@ export default class App extends Vue {
         width: 80px;
         height: 30px;
         margin: 0 10px;
+        background: #ccc;
     }
 }
 .playing {
