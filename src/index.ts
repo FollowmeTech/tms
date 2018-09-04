@@ -41,6 +41,18 @@ class List extends Tms {
     }
 }
 
-const list = new List(new Api());
+class Count extends Tms {
+    value: number = 0;
+    $plus() {
+        this.value++;
+    }
+}
 
-list.getList();
+class Store {
+    list: List = new List(new Api());
+    count: Count = new Count();
+}
+
+const store = new Store();
+
+store.list.getList();

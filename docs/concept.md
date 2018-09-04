@@ -185,4 +185,18 @@ list.getList();
 你应该将`this.api.getList()`请求回来的完整数据，传入`Commit`方法中，这样就能追踪到这个请求的结果。在`Commit`方法中去对请求的结果进行处理。
 
 同理，为了能够对所有的请求结果进行监听，所有的请求结果，都应该存储在实例上，通过`Commit`更新实例的请求结果。
+
+
 ### Module
+随着应用程序越来越大，我们需要对程序进行拆分成一个一个小的模块。
+```typescript
+
+class Store extends Tms {
+    list: List = new List(new Api());
+    count: Count = new Count();
+}
+
+const store = new Store();
+
+store.list.getList();
+```
