@@ -7,11 +7,11 @@
     - [React](./install.md#react-使用)
     - [Node](./install.md#nodejs-使用)
 - [核心概念](./concept.md)
-    - [State](./concept.md#State)
-    - [Getter](./concept.md#Getter)
-    - [Commit](./concept.md#Commit)
-    - [Action](./concept.md#Action)
-    - [Module](./concept.md#Module)
+    - [State](./concept.md#state)
+    - [Getter](./concept.md#getter)
+    - [Commit](./concept.md#commit)
+    - [Action](./concept.md#action)
+    - [Module](./concept.md#module)
 - 常见的写法
     - 表单的写法
     - 请求的写法
