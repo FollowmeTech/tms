@@ -13,5 +13,5 @@
     - [Action](./concept.md#action)
     - [Module](./concept.md#module)
 - [常见的写法](./common-usage.md)
-- 比较Vuex、Redux
-- 测试
+- [常见的错误](./common-error.md)
+- [比较Vuex、Redux](./compare.md)
