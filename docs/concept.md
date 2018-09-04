@@ -117,7 +117,7 @@ class Count extends Tms {
         }
     }
     ```
-    异步的更新实例状态，将会导致状态变化的过程无法追踪，请将异步放到`Action`中。  
+    在`Commit`异步的更新实例状态，将会导致状态变化的过程无法追踪，请将异步放到`Action`中。  
     😊 `正确的：异步的更新状态`
     ```typescript
     class Count extends Tms {
