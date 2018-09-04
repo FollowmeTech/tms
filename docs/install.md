@@ -14,16 +14,16 @@ npm install @fmfe/tms.js
 npm install @fmfe/vue-tms
 ```
 ```typescript
-import Vue from 'vue'
-import Tms from '@fmfe/tms.js'
-import VueTms from '@fmfe/vue-tms'
+import Vue from 'vue';
+import Tms from '@fmfe/tms.js';
+import VueTms from '@fmfe/vue-tms';
 
-Vue.use(VueTms, Tms)
+Vue.use(VueTms, Tms);
 
 class Count extends Tms {
     count: number = 0
     $increment() {
-        this.count++
+        this.count++;
     }
 }
 
@@ -31,16 +31,16 @@ class Store extends VueTms {
     count: Count = new Count()
 }
 
-const store = new Store()
+const store = new Store();
 
 // 运行程序
-store.run()
+store.run();
 
 // 订阅状态变化
 const onChage = (event) => {
-    console.log(event)
-}
-store.subscribe(onChage)
+    console.log(event);
+};
+store.subscribe(onChage);
 
 // 取消状态变化订阅
 // store.unsubscribe(onChage)
@@ -53,16 +53,16 @@ const app = new Vue({
     // ...
     store,
     created() {
-        this.$store.count.$increment()
+        this.$store.count.$increment();
     }
-})
+});
 
 // Typescript 添加类型，在组件中可以获得代码提示
 declare module '@fmfe/vue-tms/types/index' {
-    type _StoreInstance = {
+    type MyAppStoreInstance = {
         [P in keyof Store]: Store[P]
-    }
-    interface VueTmsInstance extends _StoreInstance { }
+    };
+    interface VueTmsInstance extends MyAppStoreInstance { }
 }
 ```
 
