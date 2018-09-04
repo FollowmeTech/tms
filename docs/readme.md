@@ -1,7 +1,7 @@
 ## 引导
 - [Tms是什么？](./what-is-tms.md)
 - [开始](./start.md)
-- 安装
+- [安装](./install.md)
     - Vue
     - Node
     - React
