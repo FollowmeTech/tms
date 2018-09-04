@@ -12,9 +12,6 @@
     - [Commit](./concept.md#commit)
     - [Action](./concept.md#action)
     - [Module](./concept.md#module)
-- 常见的写法
-    - 表单的写法
-    - 请求的写法
-    - 一些通用的规范
+- [常见的写法](./common-usage.md)
 - 比较Vuex、Redux
 - 测试
