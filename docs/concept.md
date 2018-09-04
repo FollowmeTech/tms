@@ -135,5 +135,54 @@ class Count extends Tms {
     ```
 
 ### Action
+Action专门负责所有的异步操作、比如定时器、HTTP请求等，它不负责更新状态，它将请求的结果提交给`Commit`方法。
 
+😊 `正确的：一个HTTP请求查询的例子`
+```typescript
+interface Response {
+    code: number;
+    data: string [];
+}
+
+class Api {
+    getList(): Promise<Response> {
+        return new Promise((resolve) => {
+            resolve({
+                code: 0,
+                data: ['1', '2']
+            });
+        });
+    }
+}
+
+class List extends Tms {
+    api: Api;
+    loading: boolean = false
+    data: string[] = [];
+    constructor(api: Api) {
+        super();
+        this.api = api;
+    }
+    $loadStart() {
+        this.loading = true;
+    }
+    $loadDone(response: Response) {
+        if (response.code === 0) {
+            this.data = response.data;
+        }
+        this.loading = false;
+    }
+    async getList() {
+        this.$loadStart();
+        this.$loadDone(await this.api.getList());
+    }
+}
+
+const list = new List(new Api());
+
+list.getList();
+```
+你应该将`this.api.getList()`请求回来的完整数据，传入`Commit`方法中，这样就能追踪到这个请求的结果。在`Commit`方法中去对请求的结果进行处理。
+
+同理，为了能够对所有的请求结果进行监听，所有的请求结果，都应该存储在实例上，通过`Commit`更新实例的请求结果。
 ### Module
