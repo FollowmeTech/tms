@@ -2,9 +2,10 @@
 - [Tms是什么？](./what-is-tms.md)
 - [开始](./start.md)
 - [安装](./install.md)
-    - Vue
-    - Node
-    - React
+    - [兼容性](./install.md#兼容性)
+    - [Vue](./install.md#vue-使用)
+    - [React](./install.md#react-使用)
+    - [Node](./install.md#nodejs-使用)
 - 核心概念
     - State
     - Getter
