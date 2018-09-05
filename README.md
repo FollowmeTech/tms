@@ -12,8 +12,8 @@
 
 ## Documentation
 - <a href="https://followmetech.github.io/tms/">中文文档</a>
-- <a href="https://followmetech.github.io/tms/">Vue使用</a>
+- <a href="https://followmetech.github.io/tms/install.html#vue-%E4%BD%BF%E7%94%A8">Vue使用</a>
 - <a href="https://followmetech.github.io/tms/install.html#react-%E4%BD%BF%E7%94%A8">React使用</a>
 - <a href="https://followmetech.github.io/tms/install.html#nodejs-%E4%BD%BF%E7%94%A8">Node使用</a>
-- <a href="https://github.com/FollowmeTech/tms/tree/master/package/vue-tms">Vue例子</a>
+- <a href="https://github.com/FollowmeTech/tms/tree/master/package/vue-tms">Vue-tms，在Vue中的Tms实现</a>
 
