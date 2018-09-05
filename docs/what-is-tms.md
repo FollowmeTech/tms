@@ -128,8 +128,9 @@ console.log(logs);
  */
 
 //  复现程序的执行过程
+const input2 = new Input();
 logs.forEach((item) => {
-    (input as any)[item.type](...JSON.parse(item.payloads));
+    (input2 as any)[item.type](...JSON.parse(item.payloads));
 });
 
 ```
