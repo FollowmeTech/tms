@@ -12,6 +12,7 @@
     - [Commit](./concept.md#commit)
     - [Action](./concept.md#action)
     - [Module](./concept.md#module)
+    - [Dep](./concept.md#dep)
 - [常见的写法](./common-usage.md)
 - [常见的错误](./common-error.md)
 - [比较Vuex、Redux](./compare.md)

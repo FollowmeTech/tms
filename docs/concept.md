@@ -200,3 +200,35 @@ const store = new Store();
 
 store.list.getList();
 ```
+
+
+### Dep
+```typescript
+class Count extends Tms {
+    value: number = 0;
+    $setValue(value: number) {
+        this.value = value;
+    }
+}
+
+const count = new Count();
+const onChange = (event: any) => {
+    console.log(event);
+    /**
+        {
+            type: '$setValue', // 触发的方法名称
+            payload: 100, // 提交的载荷，如果有多个，则取第一个
+            payloads: [ 100 ], // 提交的载荷
+            target: Count { value: 100 } // 触发事件的目标源
+        }
+     */
+};
+// 订阅状态变化，在每个Commit方法执行完成后执行
+count.dep.addSub(onChange);
+
+count.$setValue(100);
+
+// 销毁订阅
+count.dep.removeSub(onChange);
+```
+Dep对象，提供了订阅实例状态和取消实例状态变化订阅的方法，通过这两个基础的API，你可以根据自己的需求进一步封装。
