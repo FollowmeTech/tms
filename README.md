@@ -1,3 +1,7 @@
+[![npm](https://img.shields.io/npm/v/@fmfe/tms.js.svg)](https://www.npmjs.com/package/@fmfe/tms.js) 
+[![npm](https://img.shields.io/npm/dm/@fmfe/tms.js.svg)](https://www.npmjs.com/package/@fmfe/tms.js)
+[![npm](https://img.shields.io/npm/dt/@fmfe/tms.js.svg)](https://www.npmjs.com/package/@fmfe/tms.js)
+
 ## 安装
 ```bash
    yarn add @fmfe/tms.js
