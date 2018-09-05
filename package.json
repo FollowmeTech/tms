@@ -1,6 +1,6 @@
 {
   "name": "@fmfe/tms.js",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Using ES6 class to write state management",
   "main": "dist/tms.common.js",
   "module": "dist/tms.esm.js",
