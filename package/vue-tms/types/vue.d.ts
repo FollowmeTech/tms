@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import { VueTmsInstance } from './index'
+import { VueTmsInstance } from './index';
 
 declare module 'vue/types/vue' {
     interface Vue {
