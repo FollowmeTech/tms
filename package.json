@@ -48,7 +48,7 @@
     "rollup-plugin-babel": "^3.0.3",
     "rollup-plugin-typescript2": "^0.14.0",
     "rollup-plugin-uglify": "^3.0.0",
-    "typescript": "^2.8.3",
+    "typescript": "3.0.3",
     "typescript-eslint-parser": "^15.0.0"
   }
 }
