@@ -51,3 +51,26 @@ it('base', () => {
         }
     ]);
 });
+
+it('getPrototypes', () => {
+    class Count1 extends Tms {
+        value: number = 0;
+        $plus() {
+            this.value++;
+        }
+    }
+    class Count2 extends Count1 {
+        $setCount(value: number) {
+            this.value = value;
+        }
+        $plus() {
+            this.value += 2;
+        }
+    }
+
+    const count = new Count2();
+    count.$setCount(1000);
+    expect(count.value).toBe(1000);
+    count.$plus();
+    expect(count.value).toBe(1002);
+});
