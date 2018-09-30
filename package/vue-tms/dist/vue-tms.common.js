@@ -94,7 +94,7 @@ var VueTms = function () {
                         var onChage = function onChage(event) {
                             var position = '' + paths.concat([k, event.type]).join('.');
                             if (_this.options.isDebugLog && console) {
-                                console.log('position   ' + position + '(payload: ' + getType(event.payload) + ');', '\n\rpayload   ', event.payload, '\n\rpayloads  ', event.payloads, '\n\rtarget    ', event.target, '\n\r---');
+                                console.log('position   ' + position + '(payload: ' + getType(event.payload) + ');', '\n\rpayload   ', JSON.parse(JSON.stringify(event.payload)), '\n\rpayloads  ', JSON.parse(JSON.stringify(event.payloads)), '\n\rtarget    ', event.target, '\n\r---');
                             }
                             _this.subs.forEach(function (fn) {
                                 return fn(_extends({}, event, { position: position, time: Date.now() }));

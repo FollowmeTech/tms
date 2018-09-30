@@ -69,9 +69,9 @@ export default class VueTms implements VueTmsInstance {
                           console.log(
                               `position   ${position}(payload: ${getType(event.payload)});`,
                               `\n\rpayload   `,
-                              event.payload,
+                              JSON.parse(JSON.stringify(event.payload)),
                               `\n\rpayloads  `,
-                              event.payloads,
+                              JSON.parse(JSON.stringify(event.payloads)),
                               `\n\rtarget    `,
                               event.target,
                               `\n\r---`
