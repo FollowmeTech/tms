@@ -24,7 +24,7 @@ export interface VueTmsInstance {
 
 interface VueTmsConstructor {
     install: PluginFunction<Tms>;
-    new(options: VueTmsOptions): VueTmsInstance;
+    new(options?: VueTmsOptions): VueTmsInstance;
 }
 
 declare const VueTms: VueTmsConstructor;
