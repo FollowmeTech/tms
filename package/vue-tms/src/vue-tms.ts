@@ -1,4 +1,4 @@
-import { VueTmsInstance, VueTmsDepNotifyParams } from '../types/index';
+import { VueTmsInstance, VueTmsDepNotifyParams, VueTmsOptions } from '../types/index';
 import Vue, { VueConstructor } from 'vue';
 import Tms, { TmsDepNotifyParams, TmsConstructor } from '@fmfe/tms.js';
 
@@ -8,18 +8,14 @@ const getType = (payload: any): string => {
 
 type SubFunc = (event: VueTmsDepNotifyParams) => void;
 
-interface Options {
-    isDebugLog: boolean;
-}
-
 export default class VueTms implements VueTmsInstance {
   static _Vue: VueConstructor | undefined;
   static _Tms: TmsConstructor | undefined;
   readonly onList: Array<{ target: Tms; onChage: Function }> = []
   readonly subs: Array<SubFunc> = [];
   app: Vue | null;
-  options: Options = { isDebugLog: false };
-  constructor(options: Partial<Options>) {
+  options: VueTmsOptions = { isDebugLog: false };
+  constructor(options: VueTmsOptions = {}) {
       if (typeof options.isDebugLog === 'boolean') {
           this.options.isDebugLog = options.isDebugLog;
       }

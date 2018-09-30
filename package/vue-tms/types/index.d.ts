@@ -9,6 +9,9 @@ export interface VueTmsDepNotifyParams extends TmsDepNotifyParams {
     time: number;
 }
 
+export interface VueTmsOptions {
+    isDebugLog?: boolean;
+}
 export interface VueTmsInstance {
     readonly subs: Array<SubFunc>;
     readonly onList: Array<{ target: Tms; onChage: Function }>;
@@ -21,7 +24,7 @@ export interface VueTmsInstance {
 
 interface VueTmsConstructor {
     install: PluginFunction<Tms>;
-    new(): VueTmsInstance;
+    new(options: VueTmsOptions): VueTmsInstance;
 }
 
 declare const VueTms: VueTmsConstructor;

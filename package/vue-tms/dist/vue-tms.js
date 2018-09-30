@@ -57,7 +57,8 @@
   };
 
   var VueTms = function () {
-      function VueTms(options) {
+      function VueTms() {
+          var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
           classCallCheck(this, VueTms);
 
           this.onList = [];
