@@ -38,7 +38,7 @@
     "babel-plugin-transform-object-assign": "^6.22.0",
     "babel-preset-es2015-rollup": "^3.0.0",
     "babel-preset-stage-0": "^6.24.1",
-    "eslint": "^4.19.1",
+    "eslint": "^5.6.1",
     "eslint-config-alloy": "^1.4.2",
     "eslint-plugin-jest": "^21.15.1",
     "eslint-plugin-react": "^7.8.2",
@@ -46,9 +46,9 @@
     "jest": "^22.4.4",
     "rollup": "^0.65.0",
     "rollup-plugin-babel": "^3.0.3",
-    "rollup-plugin-typescript2": "^0.14.0",
+    "rollup-plugin-typescript2": "^0.17.0",
     "rollup-plugin-uglify": "^3.0.0",
     "typescript": "3.0.3",
-    "typescript-eslint-parser": "^15.0.0"
+    "typescript-eslint-parser": "^19.0.2"
   }
 }

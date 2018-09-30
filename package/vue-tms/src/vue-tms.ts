@@ -8,13 +8,21 @@ const getType = (payload: any): string => {
 
 type SubFunc = (event: VueTmsDepNotifyParams) => void;
 
+interface Options {
+    isDebugLog: boolean;
+}
+
 export default class VueTms implements VueTmsInstance {
   static _Vue: VueConstructor | undefined;
   static _Tms: TmsConstructor | undefined;
   readonly onList: Array<{ target: Tms; onChage: Function }> = []
   readonly subs: Array<SubFunc> = [];
   app: Vue | null;
-  constructor() {
+  options: Options = { isDebugLog: false };
+  constructor(options: Partial<Options>) {
+      if (typeof options.isDebugLog === 'boolean') {
+          this.options.isDebugLog = options.isDebugLog;
+      }
       if (!VueTms._Vue || !VueTms._Tms) {
           throw new Error(`Please install with Vue.use(VueTms, Tms).`);
       }
@@ -61,7 +69,7 @@ export default class VueTms implements VueTmsInstance {
               if (VueTms._Tms && item instanceof VueTms._Tms) {
                   const onChage = (event: TmsDepNotifyParams) => {
                       const position = `${paths.concat([k, event.type]).join('.')}`;
-                      if (process.env.NODE_ENV !== 'production') {
+                      if (this.options.isDebugLog && console) {
                           console.log(
                               `position   ${position}(payload: ${getType(event.payload)});`,
                               `\n\rpayload   `,

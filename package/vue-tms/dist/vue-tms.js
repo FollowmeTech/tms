@@ -57,11 +57,15 @@
   };
 
   var VueTms = function () {
-      function VueTms() {
+      function VueTms(options) {
           classCallCheck(this, VueTms);
 
           this.onList = [];
           this.subs = [];
+          this.options = { isDebugLog: false };
+          if (typeof options.isDebugLog === 'boolean') {
+              this.options.isDebugLog = options.isDebugLog;
+          }
           if (!VueTms._Vue || !VueTms._Tms) {
               throw new Error('Please install with Vue.use(VueTms, Tms).');
           }
@@ -92,7 +96,7 @@
                       if (VueTms._Tms && item instanceof VueTms._Tms) {
                           var onChage = function onChage(event) {
                               var position = '' + paths.concat([k, event.type]).join('.');
-                              if (process.env.NODE_ENV !== 'production') {
+                              if (_this.options.isDebugLog && console) {
                                   console.log('position   ' + position + '(payload: ' + getType(event.payload) + ');', '\n\rpayload   ', event.payload, '\n\rpayloads  ', event.payloads, '\n\rtarget    ', event.target, '\n\r---');
                               }
                               _this.subs.forEach(function (fn) {
