@@ -4,6 +4,12 @@
   (global.VueTms = factory());
 }(this, (function () { 'use strict';
 
+  var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {
+    return typeof obj;
+  } : function (obj) {
+    return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+  };
+
   var classCallCheck = function (instance, Constructor) {
     if (!(instance instanceof Constructor)) {
       throw new TypeError("Cannot call a class as a function");
@@ -98,7 +104,7 @@
                           var onChage = function onChage(event) {
                               var position = '' + paths.concat([k, event.type]).join('.');
                               if (_this.options.isDebugLog && console) {
-                                  console.log('position   ' + position + '(payload: ' + getType(event.payload) + ');', '\n\rpayload   ', JSON.parse(JSON.stringify(event.payload)), '\n\rpayloads  ', JSON.parse(JSON.stringify(event.payloads)), '\n\rtarget    ', event.target, '\n\r---');
+                                  console.log('position   ' + position + '(payload: ' + getType(event.payload) + ');', '\n\rpayload   ', _typeof(event.payload) === 'object' ? JSON.parse(JSON.stringify(event.payload)) : event.payload, '\n\rpayloads  ', JSON.parse(JSON.stringify(event.payloads)), '\n\rtarget    ', event.target, '\n\r---');
                               }
                               _this.subs.forEach(function (fn) {
                                   return fn(_extends({}, event, { position: position, time: Date.now() }));
