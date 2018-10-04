@@ -11,14 +11,14 @@ npm install @fmfe/tms.js
 ### Vue 使用
 `注意`：VueTms 无法与`vuex`一起配合使用，因为它们都是在vue的原型链上挂载了`Vue.prototype.$store`对象，会产生冲突。
 ```bash
-npm install @fmfe/vue-tms
+npm install @fmfe/tms.js @fmfe/vue-tms
 ```
 ```typescript
 import Vue from 'vue';
 import Tms from '@fmfe/tms.js';
 import VueTms from '@fmfe/vue-tms';
 
-Vue.use(VueTms, Tms);
+Vue.use(VueTms);
 
 class Count extends Tms {
     count: number = 0
@@ -58,11 +58,16 @@ const app = new Vue({
 });
 
 // Typescript 添加类型，在组件中可以获得代码提示
-declare module '@fmfe/vue-tms/types/index' {
-    type MyAppStoreInstance = {
-        [P in keyof Store]: Store[P]
-    };
-    interface VueTmsInstance extends MyAppStoreInstance { }
+declare module 'vue/types/vue' {
+    interface Vue {
+        $store: Store;
+    }
+}
+
+declare module 'vue/types/options' {
+    interface ComponentOptions<V extends Vue> {
+        store?: Store;
+    }
 }
 ```
 
