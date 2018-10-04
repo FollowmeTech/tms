@@ -1,31 +1,39 @@
 {
-  "name": "@fmfe/vue-tms",
-  "version": "0.1.6",
-  "description": "tms is used in Vue",
-  "main": "dist/vue-tms.common.js",
-  "module": "dist/vue-tms.esm.js",
-  "unpkg": "dist/vue-tms.js",
-  "types": "./types/index.d.ts",
-  "files": [
-    "dist/",
-    "src/"
-  ],
-  "scripts": {
-    "build:types": "npx rimraf ./types && tsc src/index.ts -D --declarationDir ./types --t es5 --outDir dist && npx rimraf dist"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/FollowmeTech/tms.git"
-  },
-  "author": "FollowmeTech",
-  "license": "MIT",
-  "keywords": [],
-  "bugs": {
-    "url": "https://github.com/FollowmeTech/tms/issues"
-  },
-  "homepage": "https://github.com/FollowmeTech/tms#readme",
-  "devDependencies": {
-    "@fmfe/tms.js": "file:../../",
-    "vue": "^2.5.17"
-  }
+    "name": "@fmfe/vue-tms",
+    "version": "0.1.7",
+    "description": "tms is used in Vue",
+    "main": "dist/vue-tms.common.js",
+    "module": "dist/vue-tms.esm.js",
+    "unpkg": "dist/vue-tms.js",
+    "types": "./types/index.d.ts",
+    "files": [
+        "dist/",
+        "src/",
+        "README.md"
+    ],
+    "scripts": {
+        "build:types": "npx rimraf ./types && tsc src/index.ts -D --declarationDir ./types --t es5 --outDir dist && npx rimraf dist"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/FollowmeTech/tms.git"
+    },
+    "author": "FollowmeTech",
+    "license": "MIT",
+    "keywords": [
+        "vue",
+        "tms",
+        "store",
+        "state management",
+        "vue state management",
+        "react state management"
+    ],
+    "bugs": {
+        "url": "https://github.com/FollowmeTech/tms/issues"
+    },
+    "homepage": "https://github.com/FollowmeTech/tms#readme",
+    "devDependencies": {
+        "@fmfe/tms.js": "file:../../",
+        "vue": "^2.5.17"
+    }
 }
