@@ -1,6 +1,6 @@
 {
   "name": "@fmfe/tms.js",
-  "version": "0.1.2",
+  "version": "0.1.6",
   "description": "Using ES6 class to write state management",
   "main": "dist/tms.common.js",
   "module": "dist/tms.esm.js",
@@ -20,7 +20,8 @@
   },
   "files": [
     "dist/",
-    "src/"
+    "src/",
+    "README.md"
   ],
   "repository": {
     "type": "git",
@@ -28,7 +29,13 @@
   },
   "author": "FollowmeTech",
   "license": "MIT",
-  "keywords": [],
+  "keywords": [
+      "tms",
+      "store",
+      "state management",
+      "vue state management",
+      "react state management"
+  ],
   "bugs": {
     "url": "https://github.com/FollowmeTech/tms/issues"
   },

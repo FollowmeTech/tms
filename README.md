@@ -1,6 +1,6 @@
-[![npm](https://img.shields.io/npm/v/@fmfe/tms.js.svg)](https://www.npmjs.com/packages/@fmfe/tms.js) 
-[![npm](https://img.shields.io/npm/dm/@fmfe/tms.js.svg)](https://www.npmjs.com/packages/@fmfe/tms.js)
-[![npm](https://img.shields.io/npm/dt/@fmfe/tms.js.svg)](https://www.npmjs.com/packages/@fmfe/tms.js)
+[![npm](https://img.shields.io/npm/v/@fmfe/tms.js.svg)](https://www.npmjs.com/package/@fmfe/tms.js) 
+[![npm](https://img.shields.io/npm/dm/@fmfe/tms.js.svg)](https://www.npmjs.com/package/@fmfe/tms.js)
+[![npm](https://img.shields.io/npm/dt/@fmfe/tms.js.svg)](https://www.npmjs.com/package/@fmfe/tms.js)
 
 
 ## Installation
