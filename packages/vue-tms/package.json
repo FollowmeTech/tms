@@ -5,7 +5,7 @@
   "main": "dist/vue-tms.common.js",
   "module": "dist/vue-tms.esm.js",
   "unpkg": "dist/vue-tms.js",
-  "types": "./dist/index.d.ts",
+  "types": "./types/index.d.ts",
   "files": [
     "dist/",
     "src/"
