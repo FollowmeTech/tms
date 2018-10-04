@@ -71,10 +71,10 @@ export default [
     },
     // vue-tms
     {
-        input: 'package/vue-tms/src/index.ts',
+        input: 'packages/vue-tms/src/index.ts',
         output: {
             name: 'VueTms',
-            file: 'package/vue-tms/dist/vue-tms.js',
+            file: 'packages/vue-tms/dist/vue-tms.js',
             format: 'umd'
         },
         external: ['vue', 'tms'],
@@ -84,10 +84,10 @@ export default [
         ]
     },
     {
-        input: 'package/vue-tms/src/index.ts',
+        input: 'packages/vue-tms/src/index.ts',
         output: {
             name: 'VueTms',
-            file: 'package/vue-tms/dist/vue-tms.min.js',
+            file: 'packages/vue-tms/dist/vue-tms.min.js',
             format: 'umd'
         },
         external: ['vue', 'tms'],
@@ -98,9 +98,9 @@ export default [
         ]
     },
     {
-        input: 'package/vue-tms/src/index.ts',
+        input: 'packages/vue-tms/src/index.ts',
         output: {
-            file: 'package/vue-tms/dist/vue-tms.esm.js',
+            file: 'packages/vue-tms/dist/vue-tms.esm.js',
             format: 'es'
         },
         external: ['vue', 'tms'],
@@ -110,9 +110,9 @@ export default [
         ]
     },
     {
-        input: 'package/vue-tms/src/index.ts',
+        input: 'packages/vue-tms/src/index.ts',
         output: {
-            file: 'package/vue-tms/dist/vue-tms.common.js',
+            file: 'packages/vue-tms/dist/vue-tms.common.js',
             format: 'cjs'
         },
         external: ['vue', 'tms'],

@@ -13,10 +13,10 @@
     "lint": "eslint . --ext .js,.html,.ts,.tsx",
     "lint:fix": "eslint . --fix --ext .js,.html,.ts,.tsx",
     "test:unit": "jest --config=./tests/jest.config.js --coverage",
-    "build:js": "npx rimraf dist && npx rimraf package/vue-tms/dist && rollup --config",
+    "build:js": "npx rimraf dist && npx rimraf packages/vue-tms/dist && rollup --config",
     "build:types": "npm run build:types.tms && npm run build:types.vueTms",
     "build:types.tms": "npx rimraf ./types && tsc src/index.ts -D --declarationDir ./types --t es5 --lib esnext --outDir dist -m es6 && npx rimraf dist",
-    "build:types.vueTms": "cd package/vue-tms/ && pwd && npm run build:types"
+    "build:types.vueTms": "cd packages/vue-tms/ && pwd && npm run build:types"
   },
   "files": [
     "dist/",

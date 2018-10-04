@@ -1,6 +1,6 @@
-[![npm](https://img.shields.io/npm/v/@fmfe/tms.js.svg)](https://www.npmjs.com/package/@fmfe/tms.js) 
-[![npm](https://img.shields.io/npm/dm/@fmfe/tms.js.svg)](https://www.npmjs.com/package/@fmfe/tms.js)
-[![npm](https://img.shields.io/npm/dt/@fmfe/tms.js.svg)](https://www.npmjs.com/package/@fmfe/tms.js)
+[![npm](https://img.shields.io/npm/v/@fmfe/tms.js.svg)](https://www.npmjs.com/packages/@fmfe/tms.js) 
+[![npm](https://img.shields.io/npm/dm/@fmfe/tms.js.svg)](https://www.npmjs.com/packages/@fmfe/tms.js)
+[![npm](https://img.shields.io/npm/dt/@fmfe/tms.js.svg)](https://www.npmjs.com/packages/@fmfe/tms.js)
 
 
 ## Installation
@@ -15,5 +15,5 @@
 - <a href="https://followmetech.github.io/tms/install.html#vue-%E4%BD%BF%E7%94%A8">Vue使用</a>
 - <a href="https://followmetech.github.io/tms/install.html#react-%E4%BD%BF%E7%94%A8">React使用</a>
 - <a href="https://followmetech.github.io/tms/install.html#nodejs-%E4%BD%BF%E7%94%A8">Node使用</a>
-- <a href="https://github.com/FollowmeTech/tms/tree/master/package/vue-tms">Vue-tms，在Vue中的Tms实现</a>
+- <a href="https://github.com/FollowmeTech/tms/tree/master/packages/vue-tms">Vue-tms，在Vue中的Tms实现</a>
 
