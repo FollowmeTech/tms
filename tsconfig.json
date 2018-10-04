@@ -1,29 +1,31 @@
 {
-  "compilerOptions": {
-    "strict": true,
-    "importHelpers": true,
-    "experimentalDecorators": true,
-    "target": "es2015",
-    "jsx": "react",
-    "noEmit": true,
-    "moduleResolution": "node",
-    "baseUrl": ".",
-    "paths": {
-      "@src/*": [
-        "./src/*"
-      ]
-    }
-  },
-  "types": [
-    "node"
-  ],
-  "include": [
-    "types/**/*.d.ts",
-    "src/**/*.ts",
-    "package/vue-tms/**/*.ts",
-    "src/**/*.tsx"
-  ],
-  "exclude": [
-    "node_modules",
-  ]
+    "compilerOptions": {
+        "strict": true,
+        "importHelpers": true,
+        "experimentalDecorators": true,
+        "target": "esnext",
+        "jsx": "react",
+        "noEmit": true,
+        "moduleResolution": "node",
+        "baseUrl": ".",
+        "paths": {
+            "@src/*": [
+                "./src/*"
+            ]
+        },
+        "lib": [
+            "esnext"
+        ]
+    },
+    "types": [
+        "node"
+    ],
+    "include": [
+        "types/**/*.d.ts",
+        "src/**/*.ts",
+        "src/**/*.tsx"
+    ],
+    "exclude": [
+        "node_modules",
+    ]
 }

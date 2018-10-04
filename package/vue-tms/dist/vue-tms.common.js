@@ -1,5 +1,9 @@
 'use strict';
 
+function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
+
+var Tms = _interopDefault(require('@fmfe/tms.js'));
+
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {
   return typeof obj;
 } : function (obj) {
@@ -44,6 +48,30 @@ var _extends = Object.assign || function (target) {
   return target;
 };
 
+var inherits = function (subClass, superClass) {
+  if (typeof superClass !== "function" && superClass !== null) {
+    throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);
+  }
+
+  subClass.prototype = Object.create(superClass && superClass.prototype, {
+    constructor: {
+      value: subClass,
+      enumerable: false,
+      writable: true,
+      configurable: true
+    }
+  });
+  if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
+};
+
+var possibleConstructorReturn = function (self, call) {
+  if (!self) {
+    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+  }
+
+  return call && (typeof call === "object" || typeof call === "function") ? call : self;
+};
+
 var toConsumableArray = function (arr) {
   if (Array.isArray(arr)) {
     for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) arr2[i] = arr[i];
@@ -58,27 +86,32 @@ var getType = function getType(payload) {
     return Object.prototype.toString.call(payload).replace(/^(.*?) |]$/g, '').toLowerCase();
 };
 
-var VueTms = function () {
+var VueTms = function (_Tms2) {
+    inherits(VueTms, _Tms2);
+
     function VueTms() {
         var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
         classCallCheck(this, VueTms);
 
-        this.onList = [];
-        this.subs = [];
-        this.options = { isDebugLog: false };
+        var _this = possibleConstructorReturn(this, (VueTms.__proto__ || Object.getPrototypeOf(VueTms)).call(this));
+
+        _this.onList = [];
+        _this.subs = [];
+        _this.options = { isDebugLog: false };
         if (typeof options.isDebugLog === 'boolean') {
-            this.options.isDebugLog = options.isDebugLog;
+            _this.options.isDebugLog = options.isDebugLog;
         }
-        if (!VueTms._Vue || !VueTms._Tms) {
-            throw new Error('Please install with Vue.use(VueTms, Tms).');
+        if (!VueTms._Vue) {
+            throw new Error('Please install with Vue.use(VueTms).');
         }
-        this.app = null;
+        _this.app = null;
+        return _this;
     }
 
     createClass(VueTms, [{
         key: 'run',
         value: function run() {
-            var _this = this;
+            var _this2 = this;
 
             Object.defineProperty(this, 'app', {
                 enumerable: false
@@ -96,18 +129,21 @@ var VueTms = function () {
             var observeTms = function observeTms(opts, paths) {
                 Object.keys(opts).forEach(function (k) {
                     var item = opts[k];
-                    if (VueTms._Tms && item instanceof VueTms._Tms) {
+                    if (item instanceof Tms) {
                         var onChage = function onChage(event) {
                             var position = '' + paths.concat([k, event.type]).join('.');
-                            if (_this.options.isDebugLog && console) {
+                            if (_this2.options.isDebugLog && console) {
                                 console.log('position   ' + position + '(payload: ' + getType(event.payload) + ');', '\n\rpayload   ', _typeof(event.payload) === 'object' ? JSON.parse(JSON.stringify(event.payload)) : event.payload, '\n\rpayloads  ', JSON.parse(JSON.stringify(event.payloads)), '\n\rtarget    ', event.target, '\n\r---');
                             }
-                            _this.subs.forEach(function (fn) {
-                                return fn(_extends({}, event, { position: position, time: Date.now() }));
+                            _this2.subs.forEach(function (fn) {
+                                return fn(_extends({}, event, {
+                                    position: position,
+                                    time: Date.now()
+                                }));
                             });
                         };
                         item.dep.addSub(onChage);
-                        _this.onList.push({
+                        _this2.onList.push({
                             target: item,
                             onChage: onChage
                         });
@@ -148,7 +184,6 @@ var VueTms = function () {
         key: 'install',
         value: function install(_Vue, _Tms) {
             VueTms._Vue = _Vue;
-            VueTms._Tms = _Tms;
             Object.defineProperty(VueTms._Vue.prototype, '$store', {
                 get: function get$$1() {
                     return this.$root._store;
@@ -169,6 +204,6 @@ var VueTms = function () {
         }
     }]);
     return VueTms;
-}();
+}(Tms);
 
 module.exports = VueTms;

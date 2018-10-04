@@ -1,19 +1,28 @@
 {
     "compilerOptions": {
-        "target": "es5",
-        "module": "es2015",
-        "moduleResolution": "node",
-        "lib": [
-            "es5",
-            "dom",
-            "es2015.promise"
-        ],
         "strict": true,
-        "noEmit": true
+        "importHelpers": true,
+        "experimentalDecorators": true,
+        "target": "esnext",
+        "jsx": "react",
+        "noEmit": true,
+        "moduleResolution": "node",
+        "baseUrl": ".",
+        "paths": {
+            "@src/*": [
+                "./src/*"
+            ]
+        },
+        "lib": [
+            "esnext"
+        ]
     },
     "include": [
-        "*.d.ts",
-        "src/**.ts"
+        "types/**/*.d.ts",
+        "src/**/*.ts",
+        "src/**/*.tsx"
     ],
-    "exclude": []
+    "exclude": [
+        "node_modules"
+    ]
 }

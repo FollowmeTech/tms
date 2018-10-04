@@ -1,14 +1,13 @@
-import { TmsInstance, TmsDepInstance } from '../types/index';
 import Dep from './dep';
 import observe from './observe';
 
-const dep: TmsDepInstance = new Dep();
+const dep: Dep = new Dep();
 
-export default class Tms implements TmsInstance {
-    static dep = dep;
+export default class Tms {
+    static dep: Dep = dep;
     static subscribe = dep.addSub;
     static unsubscribe = dep.removeSub;
-    dep: TmsDepInstance = new Dep();
+    dep: Dep = new Dep();
     constructor() {
         observe(this, Tms.prototype, (type: string, ...payloads: Array<any>) => {
             this.dep.notify({

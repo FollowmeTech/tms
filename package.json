@@ -1,6 +1,6 @@
 {
   "name": "@fmfe/tms.js",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Using ES6 class to write state management",
   "main": "dist/tms.common.js",
   "module": "dist/tms.esm.js",
@@ -8,16 +8,19 @@
   "types": "./types/index.d.ts",
   "scripts": {
     "dev": "rollup --config --watch",
-    "build": "rollup --config",
+    "build": "npm run build:types && npm run build:js",
     "test": "npm run lint && npm run test:unit && npm run build",
     "lint": "eslint . --ext .js,.html,.ts,.tsx",
     "lint:fix": "eslint . --fix --ext .js,.html,.ts,.tsx",
-    "test:unit": "jest --config=./tests/jest.config.js --coverage"
+    "test:unit": "jest --config=./tests/jest.config.js --coverage",
+    "build:js": "npx rimraf dist && npx rimraf package/vue-tms/dist && rollup --config",
+    "build:types": "npm run build:types.tms && npm run build:types.vueTms",
+    "build:types.tms": "npx rimraf ./types && tsc src/index.ts -D --declarationDir ./types --t es5 --lib esnext --outDir dist -m es6 && npx rimraf dist",
+    "build:types.vueTms": "cd package/vue-tms/ && pwd && npm run build:types"
   },
   "files": [
     "dist/",
-    "src/",
-    "types"
+    "src/"
   ],
   "repository": {
     "type": "git",

@@ -72,7 +72,8 @@ var observe = function observe(target, targetPrototype, dispatch) {
     Object.keys(descriptors).forEach(function (type) {
         var descriptor = descriptors[type];
         if (typeof descriptor !== 'undefined' && /^\$/.test(type) && typeof descriptor.value === 'function') {
-            Object.defineProperty(target, type, _extends({}, descriptor, { value: function value() {
+            Object.defineProperty(target, type, _extends({}, descriptor, {
+                value: function value() {
                     for (var _len = arguments.length, payloads = Array(_len), _key = 0; _key < _len; _key++) {
                         payloads[_key] = arguments[_key];
                     }
@@ -80,7 +81,8 @@ var observe = function observe(target, targetPrototype, dispatch) {
                     var value = descriptor.value.apply(target, payloads);
                     dispatch.apply(undefined, [type].concat(payloads));
                     return value;
-                } }));
+                }
+            }));
             return;
         }
     });

@@ -1,4 +1,4 @@
-import { TmsInstance } from '../types/index';
+import Tms from './tms';
 
 const getPrototypes = (obj: object, target: object): Array<object> => {
     const prototypes: Array<object> = [];
@@ -26,12 +26,12 @@ const getDescriptors = (prototypes: Array<object>): GetOwnPropertyDescriptors =>
     let i: number = prototypes.length;
     while (i--) {
         const prototype: object = prototypes[i];
-        Object.assign(descriptors, getOwnPropertyDescriptors(prototype));
+        Object.assign<GetOwnPropertyDescriptors, GetOwnPropertyDescriptors>(descriptors, getOwnPropertyDescriptors(prototype));
     }
     return descriptors;
 };
 
-const observe = (target: TmsInstance, targetPrototype: object, dispatch: Function) => {
+const observe = (target: Tms, targetPrototype: object, dispatch: Function) => {
     const descriptors: GetOwnPropertyDescriptors = getDescriptors(getPrototypes(target, targetPrototype));
     Object.keys(descriptors).forEach(type => {
         const descriptor: PropertyDescriptor | undefined = descriptors[type];

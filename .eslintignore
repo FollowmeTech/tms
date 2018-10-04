@@ -2,6 +2,5 @@ node_modules/**
 dist/**
 coverage/**
 examples/**
-package/vue-tms/node_modules/**
-package/vue-tms/dist/**
-package/vue-tms/coverage/**
+package/**
+types/**

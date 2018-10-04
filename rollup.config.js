@@ -2,10 +2,13 @@ import uglify from 'rollup-plugin-uglify';
 import babel from 'rollup-plugin-babel';
 import typescript from 'rollup-plugin-typescript2';
 
+const getTypescriptplugin = (tsconfigOverride = {}) => {
+    return typescript({
+        tsconfig: 'tsconfig.json',
+        tsconfigOverride
+    });
+};
 const plugins = [
-    typescript({
-        tsconfig: 'tsconfig.json'
-    }),
     babel({
         presets: [
             ['es2015-rollup'],
@@ -26,7 +29,10 @@ export default [
             file: 'dist/tms.js',
             format: 'umd'
         },
-        plugins
+        plugins: [
+            getTypescriptplugin(),
+            ...plugins
+        ]
     },
     {
         input: 'src/index.ts',
@@ -36,6 +42,7 @@ export default [
             format: 'umd'
         },
         plugins: [
+            getTypescriptplugin(),
             ...plugins,
             uglify()
         ]
@@ -46,7 +53,10 @@ export default [
             file: 'dist/tms.esm.js',
             format: 'es'
         },
-        plugins
+        plugins: [
+            getTypescriptplugin(),
+            ...plugins
+        ]
     },
     {
         input: 'src/index.ts',
@@ -54,7 +64,10 @@ export default [
             file: 'dist/tms.common.js',
             format: 'cjs'
         },
-        plugins
+        plugins: [
+            getTypescriptplugin(),
+            ...plugins
+        ]
     },
     // vue-tms
     {
@@ -65,7 +78,10 @@ export default [
             format: 'umd'
         },
         external: ['vue', 'tms'],
-        plugins
+        plugins: [
+            getTypescriptplugin(),
+            ...plugins
+        ]
     },
     {
         input: 'package/vue-tms/src/index.ts',
@@ -76,6 +92,7 @@ export default [
         },
         external: ['vue', 'tms'],
         plugins: [
+            getTypescriptplugin(),
             ...plugins,
             uglify()
         ]
@@ -87,7 +104,10 @@ export default [
             format: 'es'
         },
         external: ['vue', 'tms'],
-        plugins
+        plugins: [
+            getTypescriptplugin(),
+            ...plugins
+        ]
     },
     {
         input: 'package/vue-tms/src/index.ts',
@@ -96,6 +116,9 @@ export default [
             format: 'cjs'
         },
         external: ['vue', 'tms'],
-        plugins
+        plugins: [
+            getTypescriptplugin(),
+            ...plugins
+        ]
     }
 ];

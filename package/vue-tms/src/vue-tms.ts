@@ -1,32 +1,40 @@
-import { VueTmsInstance, VueTmsDepNotifyParams, VueTmsOptions } from '../types/index';
 import Vue, { VueConstructor } from 'vue';
-import Tms, { TmsDepNotifyParams, TmsConstructor } from '@fmfe/tms.js';
+import Tms, { TmsDepNotifyParams } from '@fmfe/tms.js';
 
 const getType = (payload: any): string => {
     return Object.prototype.toString.call(payload).replace(/^(.*?) |]$/g, '').toLowerCase();
 };
 
-type SubFunc = (event: VueTmsDepNotifyParams) => void;
 
-export default class VueTms implements VueTmsInstance {
+
+export interface VueTmsDepNotifyParams extends TmsDepNotifyParams {
+    position: string;
+    time: number;
+}
+
+type SubFunc = (event: VueTmsDepNotifyParams) => void;
+export interface VueTmsOptions {
+    isDebugLog?: boolean;
+}
+
+export default class VueTms extends Tms {
   static _Vue: VueConstructor | undefined;
-  static _Tms: TmsConstructor | undefined;
   readonly onList: Array<{ target: Tms; onChage: Function }> = []
   readonly subs: Array<SubFunc> = [];
   app: Vue | null;
   options: VueTmsOptions = { isDebugLog: false };
   constructor(options: VueTmsOptions = {}) {
+      super();
       if (typeof options.isDebugLog === 'boolean') {
           this.options.isDebugLog = options.isDebugLog;
       }
-      if (!VueTms._Vue || !VueTms._Tms) {
-          throw new Error(`Please install with Vue.use(VueTms, Tms).`);
+      if (!VueTms._Vue) {
+          throw new Error(`Please install with Vue.use(VueTms).`);
       }
       this.app = null;
   }
-  static install(_Vue: VueConstructor, _Tms: TmsConstructor): void {
+  static install(_Vue: VueConstructor, _Tms: Tms): void {
       VueTms._Vue = _Vue;
-      VueTms._Tms = _Tms;
       Object.defineProperty(VueTms._Vue.prototype, '$store', {
           get() {
               return (this as any).$root._store;
@@ -45,7 +53,7 @@ export default class VueTms implements VueTmsInstance {
           }
       });
   }
-  run(): this {
+  public run(): this {
       Object.defineProperty(this, 'app', {
           enumerable: false
       });
@@ -62,7 +70,7 @@ export default class VueTms implements VueTmsInstance {
       const observeTms = (opts: any, paths: Array<string>) => {
           Object.keys(opts).forEach(k => {
               const item: Tms = opts[k];
-              if (VueTms._Tms && item instanceof VueTms._Tms) {
+              if (item instanceof Tms) {
                   const onChage = (event: TmsDepNotifyParams) => {
                       const position = `${paths.concat([k, event.type]).join('.')}`;
                       if (this.options.isDebugLog && console) {
@@ -95,16 +103,16 @@ export default class VueTms implements VueTmsInstance {
       observeTms(this, []);
       return this;
   }
-  subscribe(fn: SubFunc): this {
+  public subscribe(fn: SubFunc): this {
       this.subs.push(fn);
       return this;
   }
-  unsubscribe(fn: SubFunc): this {
+  public unsubscribe(fn: SubFunc): this {
       const index = this.subs.indexOf(fn);
       this.subs.splice(index, 1);
       return this;
   }
-  destroy(): this {
+  public destroy(): this {
       if (this.app) {
           this.app.$destroy();
           this.onList.forEach(item => {

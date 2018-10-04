@@ -1,18 +1,17 @@
 {
   "name": "@fmfe/vue-tms",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "tms is used in Vue",
   "main": "dist/vue-tms.common.js",
   "module": "dist/vue-tms.esm.js",
   "unpkg": "dist/vue-tms.js",
-  "types": "./types/index.d.ts",
+  "types": "./dist/index.d.ts",
   "files": [
     "dist/",
-    "src/",
-    "types"
+    "src/"
   ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build:types": "npx rimraf ./types && tsc src/index.ts -D --declarationDir ./types --t es5 --outDir dist && npx rimraf dist"
   },
   "repository": {
     "type": "git",
@@ -26,7 +25,7 @@
   },
   "homepage": "https://github.com/FollowmeTech/tms#readme",
   "devDependencies": {
-    "@fmfe/tms.js": "^0.0.4",
+    "@fmfe/tms.js": "file:../../",
     "vue": "^2.5.17"
   }
 }
