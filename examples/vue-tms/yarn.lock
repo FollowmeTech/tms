@@ -648,13 +648,11 @@
     lodash "^4.17.5"
     to-fast-properties "^2.0.0"
 
-"@fmfe/tms.js@^0.0.5":
-  version "0.0.5"
-  resolved "https://registry.yarnpkg.com/@fmfe/tms.js/-/tms.js-0.0.5.tgz#71c14286ae71c67d5aa6775e4e808d628766bb3c"
+"@fmfe/tms.js@file:../..":
+  version "0.1.7"
 
-"@fmfe/vue-tms@^0.0.14":
-  version "0.0.14"
-  resolved "https://registry.yarnpkg.com/@fmfe/vue-tms/-/vue-tms-0.0.14.tgz#af4146e35b786c9f90d572ec1ae85cc2fd4c4db5"
+"@fmfe/vue-tms@file:../../packages/vue-tms":
+  version "0.1.9"
 
 "@intervolga/optimize-cssnano-plugin@^1.0.5":
   version "1.0.6"
