@@ -1,7 +1,7 @@
 ## 比较Vuex、Redux
 假设实现一个计数功能  
 
-### `vuex`
+### `Vuex`
 ```typescript
 
 import Vuex from 'vuex';
@@ -22,7 +22,7 @@ store.commit('increment');
 console.log(store.state.count); // -> 1
 
 ```
-### `redux`
+### `Redux`
 ```typescript
 
 import { createStore } from 'redux';
