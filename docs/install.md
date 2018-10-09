@@ -31,7 +31,10 @@ class Store extends VueTms {
     count: Count = new Count()
 }
 
-const store = new Store();
+const store = new Store({
+    // 是否显示 Commit log
+    isDebugLog: process.env.NODE_ENV !== 'production'
+});
 
 // 运行程序
 store.run();
