@@ -51,11 +51,16 @@ const app = new Vue({
 })
 
 // Typescript 添加类型，在组件中可以获得代码提示
-declare module '@fmfe/vue-tms/types/index' {
-    type _StoreInstance = {
-        [P in keyof Store]: Store[P]
+declare module 'vue/types/vue' {
+    interface Vue {
+        $store: Store;
     }
-    interface VueTmsInstance extends _StoreInstance { }
+}
+
+declare module 'vue/types/options' {
+    interface ComponentOptions<V extends Vue> {
+        store?: Store;
+    }
 }
 
 ```
