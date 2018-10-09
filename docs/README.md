@@ -4,6 +4,7 @@
     - [它是什么？](./what-is-tms.md#它是什么)
     - [实现一个简单版本的Tms](./what-is-tms.md#实现一个简单版本的tms)
     - [复现场景原理](./what-is-tms.md#复现场景原理)
+    - [SSR中使用Tms](./what-is-tms.md#ssr中使用tms)
 - [开始](./start.md)
     - [一个简单的例子](./start.md#一个简单的例子)
 - [安装](./install.md)
