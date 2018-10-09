@@ -10,7 +10,9 @@ class Store extends VueTms {
     home: Home = new Home()
 }
 
-const store = new Store();
+const store = new Store({
+    isDebugLog: true
+});
 export const tmsSnapshot = new TmsSnapshot(store, Tms);
 store
     .run()
