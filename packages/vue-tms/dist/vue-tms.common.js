@@ -206,3 +206,5 @@ var VueTms = function (_Tms2) {
     }]);
     return VueTms;
 }(Tms);
+
+module.exports = VueTms;
