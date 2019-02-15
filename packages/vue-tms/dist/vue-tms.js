@@ -1,7 +1,7 @@
 (function (global, factory) {
-  typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('@fmfe/tms.js')) :
+  typeof exports === 'object' && typeof module !== 'undefined' ? factory(require('@fmfe/tms.js')) :
   typeof define === 'function' && define.amd ? define(['@fmfe/tms.js'], factory) :
-  (global.VueTms = factory(global.Tms));
+  (factory(global.Tms));
 }(this, (function (Tms) { 'use strict';
 
   Tms = Tms && Tms.hasOwnProperty('default') ? Tms['default'] : Tms;
@@ -208,7 +208,5 @@
       }]);
       return VueTms;
   }(Tms);
-
-  return VueTms;
 
 })));
