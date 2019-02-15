@@ -20,8 +20,8 @@ export interface VueTmsOptions {
 export default class VueTms extends Tms {
   static _Vue: VueConstructor | undefined;
   readonly onList: Array<{ target: Tms; onChage: Function }> = []
-  readonly subs: Array<SubFunc> = [];
-  app: Vue | null;
+    readonly subs: Array<SubFunc> = [];
+    private _run = false;
   options: VueTmsOptions = { isDebugLog: false };
   constructor(options: VueTmsOptions = {}) {
       super();
@@ -31,7 +31,6 @@ export default class VueTms extends Tms {
       if (!VueTms._Vue) {
           throw new Error(`Please install with Vue.use(VueTms).`);
       }
-      this.app = null;
   }
   static install(_Vue: VueConstructor, _Tms: Tms): void {
       VueTms._Vue = _Vue;
@@ -53,7 +52,9 @@ export default class VueTms extends Tms {
           }
       });
   }
-  public run(): this {
+    public run(): this {
+        if (this._run) return this;
+        this._run = true;
       Object.defineProperty(this, 'app', {
           enumerable: false
       });
@@ -64,45 +65,45 @@ export default class VueTms extends Tms {
           enumerable: false
       });
       if (!VueTms._Vue) return this;
-      this.app = new VueTms._Vue({
-          data: this
-      });
-      const observeTms = (opts: any, paths: Array<string>) => {
-          Object.keys(opts).forEach(k => {
-              const item: Tms = opts[k];
-              if (item instanceof Tms) {
-                  const onChage = (event: TmsDepNotifyParams) => {
-                      const position = `${paths.concat([k, event.type]).join('.')}`;
-                      if (this.options.isDebugLog && console) {
-                          console.log(
-                              `position   ${position}(payload: ${getType(event.payload)});`,
-                              `\n\rpayload   `,
-                              typeof event.payload === 'object' ? JSON.parse(JSON.stringify(event.payload)) : event.payload,
-                              `\n\rpayloads  `,
-                              JSON.parse(JSON.stringify(event.payloads)),
-                              `\n\rtarget    `,
-                              event.target,
-                              `\n\r---`
-                          );
-                      }
-                      this.subs.forEach(fn => fn({
-                          ...event,
-                          position,
-                          time: Date.now()
-                      }));
-                  };
-                  item.dep.addSub(onChage);
-                  this.onList.push({
-                      target: item,
-                      onChage
-                  });
-                  observeTms(item, [...paths, k]);
-              }
-          });
-      };
-      observeTms(this, []);
+      VueTms._Vue.observable(this);
       return this;
-  }
+    }
+    public observeTms(target: typeof Tms, paths: string[]) {
+        const observeTms = (opts: any, paths: Array<string>) => {
+            Object.keys(opts).forEach(k => {
+                const item: Tms = opts[k];
+                if (item instanceof Tms) {
+                    const onChage = (event: TmsDepNotifyParams) => {
+                        const position = `${paths.concat([k, event.type]).join('.')}`;
+                        if (this.options.isDebugLog && console) {
+                            console.log(
+                                `position   ${position}(payload: ${getType(event.payload)});`,
+                                `\n\rpayload   `,
+                                typeof event.payload === 'object' ? JSON.parse(JSON.stringify(event.payload)) : event.payload,
+                                `\n\rpayloads  `,
+                                JSON.parse(JSON.stringify(event.payloads)),
+                                `\n\rtarget    `,
+                                event.target,
+                                `\n\r---`
+                            );
+                        }
+                        this.subs.forEach(fn => fn({
+                            ...event,
+                            position,
+                            time: Date.now()
+                        }));
+                    };
+                    item.dep.addSub(onChage);
+                    this.onList.push({
+                        target: item,
+                        onChage
+                    });
+                    observeTms(item, [...paths, k]);
+                }
+            });
+        };
+        observeTms(target, paths);
+    }
   public subscribe(fn: SubFunc): this {
       this.subs.push(fn);
       return this;
@@ -113,12 +114,9 @@ export default class VueTms extends Tms {
       return this;
   }
   public destroy(): this {
-      if (this.app) {
-          this.app.$destroy();
-          this.onList.forEach(item => {
-              item.target.dep.removeSub(item.onChage);
-          });
-      }
+        this.onList.forEach(item => {
+            item.target.dep.removeSub(item.onChage);
+        });
       this.onList.splice(0, this.onList.length);
       this.subs.splice(0, this.subs.length);
       return this;

@@ -1,4 +1,4 @@
-import Vue, { VueConstructor } from 'vue';
+import { VueConstructor } from 'vue';
 import Tms, { TmsDepNotifyParams } from '@fmfe/tms.js';
 export interface VueTmsDepNotifyParams extends TmsDepNotifyParams {
     position: string;
@@ -15,11 +15,12 @@ export default class VueTms extends Tms {
         onChage: Function;
     }>;
     readonly subs: Array<SubFunc>;
-    app: Vue | null;
+    private _run;
     options: VueTmsOptions;
     constructor(options?: VueTmsOptions);
     static install(_Vue: VueConstructor, _Tms: Tms): void;
     run(): this;
+    observeTms(target: typeof Tms, paths: string[]): void;
     subscribe(fn: SubFunc): this;
     unsubscribe(fn: SubFunc): this;
     destroy(): this;

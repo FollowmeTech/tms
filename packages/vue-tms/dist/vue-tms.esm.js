@@ -93,6 +93,7 @@ var VueTms = function (_Tms2) {
 
         _this.onList = [];
         _this.subs = [];
+        _this._run = false;
         _this.options = { isDebugLog: false };
         if (typeof options.isDebugLog === 'boolean') {
             _this.options.isDebugLog = options.isDebugLog;
@@ -100,15 +101,14 @@ var VueTms = function (_Tms2) {
         if (!VueTms._Vue) {
             throw new Error('Please install with Vue.use(VueTms).');
         }
-        _this.app = null;
         return _this;
     }
 
     createClass(VueTms, [{
         key: 'run',
         value: function run() {
-            var _this2 = this;
-
+            if (this._run) return this;
+            this._run = true;
             Object.defineProperty(this, 'app', {
                 enumerable: false
             });
@@ -119,9 +119,14 @@ var VueTms = function (_Tms2) {
                 enumerable: false
             });
             if (!VueTms._Vue) return this;
-            this.app = new VueTms._Vue({
-                data: this
-            });
+            VueTms._Vue.observable(this);
+            return this;
+        }
+    }, {
+        key: 'observeTms',
+        value: function observeTms(target, paths) {
+            var _this2 = this;
+
             var observeTms = function observeTms(opts, paths) {
                 Object.keys(opts).forEach(function (k) {
                     var item = opts[k];
@@ -147,8 +152,7 @@ var VueTms = function (_Tms2) {
                     }
                 });
             };
-            observeTms(this, []);
-            return this;
+            observeTms(target, paths);
         }
     }, {
         key: 'subscribe',
@@ -166,12 +170,9 @@ var VueTms = function (_Tms2) {
     }, {
         key: 'destroy',
         value: function destroy() {
-            if (this.app) {
-                this.app.$destroy();
-                this.onList.forEach(function (item) {
-                    item.target.dep.removeSub(item.onChage);
-                });
-            }
+            this.onList.forEach(function (item) {
+                item.target.dep.removeSub(item.onChage);
+            });
             this.onList.splice(0, this.onList.length);
             this.subs.splice(0, this.subs.length);
             return this;
