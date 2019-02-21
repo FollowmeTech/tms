@@ -55,9 +55,6 @@ export default class VueTms extends Tms {
     public run(): this {
         if (this._run) return this;
         this._run = true;
-      Object.defineProperty(this, 'app', {
-          enumerable: false
-      });
       Object.defineProperty(this, 'subs', {
           enumerable: false
       });
@@ -65,7 +62,8 @@ export default class VueTms extends Tms {
           enumerable: false
       });
       if (!VueTms._Vue) return this;
-      VueTms._Vue.observable(this);
+        VueTms._Vue.observable(this);
+        this.observeTms(this as any, []);
       return this;
     }
     public observeTms(target: typeof Tms, paths: string[]) {
