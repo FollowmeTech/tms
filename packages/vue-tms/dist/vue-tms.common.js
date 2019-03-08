@@ -83,7 +83,7 @@ var toConsumableArray = function (arr) {
 };
 
 var getType = function getType(payload) {
-    return Object.prototype.toString.call(payload).replace(/^(.*?) |]$/g, '').toLowerCase();
+    return Object.prototype.toString.call(payload).replace(/^(.*?) |]$/g, "").toLowerCase();
 };
 
 var VueTms = function (_Tms2) {
@@ -99,33 +99,36 @@ var VueTms = function (_Tms2) {
         _this.subs = [];
         _this._run = false;
         _this.options = { isDebugLog: false };
-        if (typeof options.isDebugLog === 'boolean') {
+        Object.defineProperty(_this, "_run", {
+            enumerable: false
+        });
+        Object.defineProperty(_this, "subs", {
+            enumerable: false
+        });
+        Object.defineProperty(_this, "onList", {
+            enumerable: false
+        });
+        if (typeof options.isDebugLog === "boolean") {
             _this.options.isDebugLog = options.isDebugLog;
         }
         if (!VueTms._Vue) {
-            throw new Error('Please install with Vue.use(VueTms).');
+            throw new Error("Please install with Vue.use(VueTms).");
         }
         return _this;
     }
 
     createClass(VueTms, [{
-        key: 'run',
+        key: "run",
         value: function run() {
             if (this._run) return this;
             this._run = true;
-            Object.defineProperty(this, 'subs', {
-                enumerable: false
-            });
-            Object.defineProperty(this, 'onList', {
-                enumerable: false
-            });
             if (!VueTms._Vue) return this;
             VueTms._Vue.observable(this);
             this.observeTms(this, []);
             return this;
         }
     }, {
-        key: 'observeTms',
+        key: "observeTms",
         value: function observeTms(target, paths) {
             var _this2 = this;
 
@@ -134,9 +137,9 @@ var VueTms = function (_Tms2) {
                     var item = opts[k];
                     if (item instanceof Tms) {
                         var onChage = function onChage(event) {
-                            var position = '' + paths.concat([k, event.type]).join('.');
+                            var position = "" + paths.concat([k, event.type]).join(".");
                             if (_this2.options.isDebugLog && console) {
-                                console.log('position   ' + position + '(payload: ' + getType(event.payload) + ');', '\n\rpayload   ', _typeof(event.payload) === 'object' ? JSON.parse(JSON.stringify(event.payload)) : event.payload, '\n\rpayloads  ', JSON.parse(JSON.stringify(event.payloads)), '\n\rtarget    ', event.target, '\n\r---');
+                                console.log("position   " + position + "(payload: " + getType(event.payload) + ");", "\n\rpayload   ", _typeof(event.payload) === "object" ? JSON.parse(JSON.stringify(event.payload)) : event.payload, "\n\rpayloads  ", JSON.parse(JSON.stringify(event.payloads)), "\n\rtarget    ", event.target, "\n\r---");
                             }
                             _this2.subs.forEach(function (fn) {
                                 return fn(_extends({}, event, {
@@ -157,20 +160,20 @@ var VueTms = function (_Tms2) {
             observeTms(target, paths);
         }
     }, {
-        key: 'subscribe',
+        key: "subscribe",
         value: function subscribe(fn) {
             this.subs.push(fn);
             return this;
         }
     }, {
-        key: 'unsubscribe',
+        key: "unsubscribe",
         value: function unsubscribe(fn) {
             var index = this.subs.indexOf(fn);
             this.subs.splice(index, 1);
             return this;
         }
     }, {
-        key: 'destroy',
+        key: "destroy",
         value: function destroy() {
             this.onList.forEach(function (item) {
                 item.target.dep.removeSub(item.onChage);
@@ -180,15 +183,15 @@ var VueTms = function (_Tms2) {
             return this;
         }
     }], [{
-        key: 'install',
+        key: "install",
         value: function install(_Vue, _Tms) {
             VueTms._Vue = _Vue;
-            Object.defineProperty(VueTms._Vue.prototype, '$store', {
+            Object.defineProperty(VueTms._Vue.prototype, "$store", {
                 get: function get$$1() {
                     return this.$root._store;
                 }
             });
-            Object.defineProperty(VueTms._Vue.prototype, '_store', {
+            Object.defineProperty(VueTms._Vue.prototype, "_store", {
                 get: function get$$1() {
                     return this.$options.store;
                 }
