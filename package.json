@@ -1,65 +1,32 @@
 {
-  "name": "@fmfe/tms.js",
-  "version": "0.1.7",
-  "description": "Using ES6 class to write state management",
-  "main": "dist/tms.common.js",
-  "module": "dist/tms.esm.js",
-  "unpkg": "dist/tms.js",
-  "types": "./types/index.d.ts",
-  "scripts": {
-    "dev": "rollup --config --watch",
-    "build": "npm run build:types && npm run build:js",
-    "test": "npm run lint && npm run test:unit && npm run build",
-    "lint": "eslint . --ext .js,.html,.ts,.tsx",
-    "lint:fix": "eslint . --fix --ext .js,.html,.ts,.tsx",
-    "test:unit": "jest --config=./tests/jest.config.js --coverage",
-    "build:js": "npx rimraf dist && npx rimraf packages/vue-tms/dist && rollup --config",
-    "build:types": "npm run build:types.tms && npm run build:types.vueTms",
-    "build:types.tms": "npx rimraf ./types && tsc src/index.ts -D --declarationDir ./types --t es5 --lib esnext --outDir dist -m es6 && npx rimraf dist",
-    "build:types.vueTms": "cd packages/vue-tms/ && pwd && npm run build:types"
-  },
-  "files": [
-    "dist/",
-    "types/",
-    "src/",
-    "README.md"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/FollowmeTech/tms.git"
-  },
-  "author": "FollowmeTech",
-  "license": "MIT",
-  "keywords": [
-      "tms",
-      "store",
-      "state management",
-      "vue state management",
-      "react state management"
-  ],
-  "bugs": {
-    "url": "https://github.com/FollowmeTech/tms/issues"
-  },
-  "homepage": "https://github.com/FollowmeTech/tms#readme",
-  "devDependencies": {
-    "@types/jest": "^22.2.3",
-    "@types/node": "^10.9.2",
-    "babel-core": "^6.26.0",
-    "babel-eslint": "^8.2.3",
-    "babel-plugin-transform-object-assign": "^6.22.0",
-    "babel-preset-es2015-rollup": "^3.0.0",
-    "babel-preset-stage-0": "^6.24.1",
-    "eslint": "^5.6.1",
-    "eslint-config-alloy": "^1.4.2",
-    "eslint-plugin-jest": "^21.15.1",
-    "eslint-plugin-react": "^7.8.2",
-    "eslint-plugin-typescript": "^0.12.0",
-    "jest": "^22.4.4",
-    "rollup": "^0.65.0",
-    "rollup-plugin-babel": "^3.0.3",
-    "rollup-plugin-typescript2": "^0.17.0",
-    "rollup-plugin-uglify": "^3.0.0",
-    "typescript": "3.0.3",
-    "typescript-eslint-parser": "^19.0.2"
-  }
+    "name": "tms",
+    "template": "monorepo",
+    "version": "1.0.0",
+    "type": "module",
+    "scripts": {
+        "prepare": "./prepare.sh",
+        "lint:js": "biome check --write --no-errors-on-unmatched",
+        "lint:type": "pnpm --filter \"*\" lint:type",
+        "build:packages": "pnpm --filter \"./packages/**\" build",
+        "release": "npm run build:packages && lerna publish --force-publish --exact",
+        "test": "pnpm --filter \"*\" test"
+    },
+    "engines": {
+        "lerna": ">=8",
+        "node": ">=22",
+        "pnpm": ">=9"
+    },
+    "devDependencies": {
+        "lint-staged": "15.2.4",
+        "husky": "8.0.3",
+        "@biomejs/biome": "1.9.4"
+    },
+    "private": false,
+    "publishConfig": {
+        "registry": "https://npm.dp-ops.com"
+    },
+    "workspaces": [
+        "packages/*",
+        "examples/*"
+    ]
 }

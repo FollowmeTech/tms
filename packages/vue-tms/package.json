@@ -2,18 +2,24 @@
     "name": "@fmfe/vue-tms",
     "version": "0.2.4",
     "description": "tms is used in Vue",
-    "main": "dist/vue-tms.common.js",
-    "module": "dist/vue-tms.esm.js",
+    "module": "dist/index.mjs",
     "unpkg": "dist/vue-tms.js",
-    "types": "./types/index.d.ts",
+    "types": "./dist/index.d.ts",
     "files": [
-        "dist/",
-        "src/",
-        "types/",
-        "README.md"
+        "src",
+        "dist",
+        "*.mjs",
+        "template",
+        "public"
     ],
     "scripts": {
-        "build:types": "npx rimraf ./types && tsc src/index.ts -D --declarationDir ./types --t es5 --outDir dist && npx rimraf dist"
+        "build:types": "npx rimraf ./types && tsc src/index.ts -D --declarationDir ./types --t es5 --outDir dist && npx rimraf dist",
+        "lint:css": "stylelint '**/*.{css,vue}' --fix --aei",
+        "lint:type": "tsc --noEmit",
+        "test": "vitest --pass-with-no-tests",
+        "coverage": "vitest run --coverage --pass-with-no-tests",
+        "lint:js": "biome check --write --no-errors-on-unmatched",
+        "build": "unbuild"
     },
     "repository": {
         "type": "git",
@@ -34,7 +40,24 @@
     },
     "homepage": "https://github.com/FollowmeTech/tms#readme",
     "devDependencies": {
-        "@fmfe/tms.js": "file:../../",
-        "vue": "^2.6.6"
+        "@fmfe/tms.js":  "workspace:*",
+        "vue": "^2.6.6",
+        "@gez/lint": "3.0.0-beta.44",
+        "@types/node": "22.9.0",
+        "@vitest/coverage-v8": "2.1.5",
+        "stylelint": "16.10.0",
+        "typescript": "5.7.2",
+        "vitest": "2.1.5",
+        "@biomejs/biome": "1.9.4",
+        "unbuild": "2.0.0"
+    },
+    "template": "library",
+    "type": "module",
+    "private": false,
+    "exports": {
+        ".": {
+            "import": "./dist/index.mjs",
+            "types": "./dist/index.d.ts"
+        }
     }
 }
