@@ -10,16 +10,16 @@
         "build": "unbuild"
     },
     "devDependencies": {
+        "@biomejs/biome": "1.9.4",
         "@gez/lint": "3.0.0-beta.44",
         "@types/node": "22.9.0",
         "@vitest/coverage-v8": "2.1.5",
         "stylelint": "16.10.0",
         "typescript": "5.7.2",
-        "vitest": "2.1.5",
-        "@biomejs/biome": "1.9.4",
-        "unbuild": "2.0.0"
+        "unbuild": "2.0.0",
+        "vitest": "2.1.5"
     },
-    "version": "0.0.0",
+    "version": "2.0.0",
     "type": "module",
     "private": false,
     "exports": {

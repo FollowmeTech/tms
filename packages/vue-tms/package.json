@@ -1,6 +1,6 @@
 {
     "name": "@fmfe/vue-tms",
-    "version": "0.2.4",
+    "version": "2.0.0",
     "description": "tms is used in Vue",
     "module": "dist/index.mjs",
     "unpkg": "dist/vue-tms.js",
@@ -40,16 +40,16 @@
     },
     "homepage": "https://github.com/FollowmeTech/tms#readme",
     "devDependencies": {
-        "@fmfe/tms.js":  "workspace:*",
-        "vue": "^2.6.6",
+        "@biomejs/biome": "1.9.4",
+        "@fmfe/tms.js": "workspace:*",
         "@gez/lint": "3.0.0-beta.44",
         "@types/node": "22.9.0",
         "@vitest/coverage-v8": "2.1.5",
         "stylelint": "16.10.0",
         "typescript": "5.7.2",
+        "unbuild": "2.0.0",
         "vitest": "2.1.5",
-        "@biomejs/biome": "1.9.4",
-        "unbuild": "2.0.0"
+        "vue": "^2.6.6"
     },
     "template": "library",
     "type": "module",
