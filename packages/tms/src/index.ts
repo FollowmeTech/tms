@@ -1,6 +1,6 @@
-import { TmsDepNotifyParams } from './dep';
+import type { TmsDepNotifyParams } from './dep';
 import Tms from './tms';
 
-export { TmsDepNotifyParams };
+export type { TmsDepNotifyParams };
 
 export default Tms;
