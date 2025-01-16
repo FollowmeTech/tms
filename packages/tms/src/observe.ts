@@ -50,7 +50,10 @@ const observe = (target: Tms, targetPrototype: object, dispatch: Function) => {
             Object.defineProperty(target, type, {
                 ...descriptor,
                 value(...payloads: Array<any>) {
-                    const value = descriptor.value.apply(this, payloads);
+                    const value = descriptor.value.apply(
+                        this ?? target,
+                        payloads
+                    );
                     dispatch(type, ...payloads);
                     return value;
                 }
