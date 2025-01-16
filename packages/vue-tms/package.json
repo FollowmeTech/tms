@@ -1,6 +1,6 @@
 {
     "name": "@fmfe/vue-tms",
-    "version": "2.0.2",
+    "version": "2.0.3",
     "description": "tms is used in Vue",
     "module": "dist/index.mjs",
     "unpkg": "dist/vue-tms.js",
